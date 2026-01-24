@@ -82,7 +82,7 @@ const routes: RouteRecordRaw[] = [
     path: '/:shortId',
     name: 'ShortLinkRedirect',
     component: () => import('@/views/tracker/Landing.vue'),
-    beforeEnter: (to, from, next) => {
+    beforeEnter: (to, _from, next) => {
       // 排除已定义的路由路径
       const excludedPaths = ['claims', 'faq', 'contact', 'terms-and-conditions', 
                             'privacy-policy', 'email', 'unsubscribe', 'preferences'];
