@@ -29,7 +29,7 @@ export default defineConfig({
       },
       '^/api/.*': {
         target: 'http://localhost:8088',
-        // target:  'https://api.wristo.io',
+        // target:  'https://api.eu261claim.com',
         changeOrigin: true,
         secure: false,
         // rewrite: (path) => path.replace(/^\/api/, ''),
