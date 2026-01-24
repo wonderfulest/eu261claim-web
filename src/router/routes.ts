@@ -1,11 +1,17 @@
 import type { RouteRecordRaw } from 'vue-router'
 
 const routes: RouteRecordRaw[] = [
+  /**
+   * Home Page - 航班理赔信息平台主页
+   */
   {
     path: '/',
     name: 'home',
-    component: () => import('@/views/home/Home.vue')
+    component: () => import('@/views/tracker/Landing.vue')
   },
+  /**
+   * Other Pages
+   */
   {
     path: '/claims',
     name: 'ClaimList',
@@ -31,7 +37,6 @@ const routes: RouteRecordRaw[] = [
     name: 'CheckoutHelp',
     component: () => import('@/views/faq/CheckoutHelp.vue')
   },
- 
   {
     path: '/contact',
     name: 'Contact',
@@ -47,7 +52,6 @@ const routes: RouteRecordRaw[] = [
     name: 'PrivacyPolicy',
     component: () => import('@/views/PrivacyPolicy.vue')
   },
- 
   /**
    * Email Settings
    */
@@ -67,22 +71,33 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/views/email/PreferencesSuccess.vue')
   },
   /**
-   * Tracker Landing Page (航班理赔信息平台)
-   */
-  {
-    path: '/landing/:shortId?',
-    name: 'TrackerLanding',
-    component: () => import('@/views/tracker/Landing.vue')
-  },
-  /**
-   * Short Link Redirect (短链接重定向)
+   * Short Link Redirect (短链接追踪)
+   * 邮件中的链接格式：https://yourdomain.com/{shortId}
+   * 例如：/abc123, /test456, /demo
+   * 
    * 注意：这个路由必须在最后，因为它会匹配所有单段路径
+   * 需要排除已定义的路由路径（claims, faq, contact 等）
    */
   {
     path: '/:shortId',
     name: 'ShortLinkRedirect',
-    component: () => import('@/views/tracker/Landing.vue')
+    component: () => import('@/views/tracker/Landing.vue'),
+    beforeEnter: (to, from, next) => {
+      // 排除已定义的路由路径
+      const excludedPaths = ['claims', 'faq', 'contact', 'terms-and-conditions', 
+                            'privacy-policy', 'email', 'unsubscribe', 'preferences'];
+      const shortId = to.params.shortId as string;
+      
+      if (excludedPaths.includes(shortId)) {
+        next({ name: 'NotFound' });
+      } else {
+        next();
+      }
+    }
   },
+  /**
+   * 404 Not Found
+   */
   {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
