@@ -66,6 +66,23 @@ const routes: RouteRecordRaw[] = [
     name: 'PreferencesSuccess',
     component: () => import('@/views/email/PreferencesSuccess.vue')
   },
+  /**
+   * Tracker Landing Page (航班理赔信息平台)
+   */
+  {
+    path: '/landing/:shortId?',
+    name: 'TrackerLanding',
+    component: () => import('@/views/tracker/Landing.vue')
+  },
+  /**
+   * Short Link Redirect (短链接重定向)
+   * 注意：这个路由必须在最后，因为它会匹配所有单段路径
+   */
+  {
+    path: '/:shortId',
+    name: 'ShortLinkRedirect',
+    component: () => import('@/views/tracker/Landing.vue')
+  },
   {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',

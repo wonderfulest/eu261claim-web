@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>独立航班理赔信息平台 - EU261 法案理赔查询</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Microsoft YaHei', sans-serif;
+            background: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* 顶部信任背书区域 */
+        .hero-section {
+            background: linear-gradient(135deg, #003399 0%, #0055cc 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badges {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+        }
+
+        .eu-flag {
+            width: 30px;
+            height: 20px;
+            background: #003399;
+            border-radius: 3px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .eu-flag::after {
+            content: '★';
+            color: #FFCC00;
+            font-size: 12px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        h1 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            line-height: 1.8;
+            max-width: 900px;
+            margin: 0 auto;
+            opacity: 0.95;
+        }
+
+        /* 主要内容区域 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* EU261 法案说明 */
+        .law-section {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .law-section h2 {
+            color: #003399;
+            font-size: 28px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .law-section h2::before {
+            content: '⚖️';
+            font-size: 32px;
+        }
+
+        .law-content {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .law-content strong {
+            color: #003399;
+            font-weight: 600;
+        }
+
+        /* 航班列表 */
+        .flight-section {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .flight-section h2 {
+            color: #003399;
+            font-size: 24px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .flight-section h2::before {
+            content: '✈️';
+            font-size: 28px;
+        }
+
+        .flight-table-wrapper {
+            overflow-x: auto;
+        }
+
+        .flight-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .flight-table thead {
+            background: #f8f9fa;
+        }
+
+        .flight-table th {
+            padding: 15px 10px;
+            text-align: left;
+            font-weight: 600;
+            color: #333;
+            border-bottom: 2px solid #dee2e6;
+            white-space: nowrap;
+        }
+
+        .flight-table td {
+            padding: 15px 10px;
+            border-bottom: 1px solid #dee2e6;
+            color: #555;
+        }
+
+        .flight-table tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        .compensation-badge {
+            background: #28a745;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 13px;
+            white-space: nowrap;
+        }
+
+        .delay-indicator {
+            color: #dc3545;
+            font-weight: 600;
+        }
+
+        /* 检查理赔资格按钮 */
+        .check-button {
+            background: #003399;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .check-button:hover {
+            background: #0055cc;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0, 51, 153, 0.3);
+        }
+
+        /* 引导模块 */
+        .cta-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .cta-section h3 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .cta-content {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .cta-options {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .cta-option {
+            flex: 1;
+            min-width: 250px;
+            max-width: 400px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #003399;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 51, 153, 0.3);
+        }
+
+        .cta-button:hover {
+            background: #0055cc;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 51, 153, 0.4);
+        }
+
+        .qr-code {
+            margin-top: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        .qr-code img {
+            width: 150px;
+            height: 150px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+        }
+
+        .qr-description {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* 悬浮按钮 */
+        .floating-button {
+            position: fixed;
+            right: 30px;
+            bottom: 30px;
+            background: #28a745;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            box-shadow: 0 4px 20px rgba(40, 167, 69, 0.4);
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .floating-button:hover {
+            background: #218838;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(40, 167, 69, 0.5);
+        }
+
+        .floating-button::before {
+            content: '💬';
+            font-size: 20px;
+        }
+
+        /* 底部区域 */
+        .footer-section {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 40px 20px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h4 {
+            color: #3498db;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .footer-section p {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #bdc3c7;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #5dade2;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #34495e;
+            font-size: 14px;
+            color: #95a5a6;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 28px;
+            }
+
+            .hero-subtitle {
+                font-size: 16px;
+            }
+
+            .law-section, .flight-section, .cta-section {
+                padding: 25px;
+            }
+
+            .flight-table {
+                font-size: 12px;
+            }
+
+            .flight-table th,
+            .flight-table td {
+                padding: 10px 5px;
+            }
+
+            .floating-button {
+                right: 15px;
+                bottom: 15px;
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+
+            .cta-options {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+
+        /* 空状态 */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+
+        .empty-state::before {
+            content: '📭';
+            font-size: 64px;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        /* 搜索栏样式 */
+        .search-bar {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .search-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .search-input {
+            padding: 10px 15px;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #003399;
+        }
+
+        .search-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        .search-button {
+            padding: 10px 25px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .search-button-primary {
+            background: #003399;
+            color: white;
+        }
+
+        .search-button-primary:hover {
+            background: #0055cc;
+        }
+
+        .search-button-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .search-button-secondary:hover {
+            background: #5a6268;
+        }
+
+        /* 分页样式 */
+        .pagination-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .pagination-info {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .pagination-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .page-size-selector {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .page-size-selector select {
+            padding: 8px 12px;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .pagination-nav {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .page-button {
+            padding: 8px 12px;
+            border: 1px solid #dee2e6;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .page-button:hover:not(:disabled) {
+            background: #f8f9fa;
+            border-color: #003399;
+        }
+
+        .page-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .page-input {
+            width: 60px;
+            padding: 8px;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .loading-overlay {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.8);
+            z-index: 10;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .loading-overlay.active {
+            display: flex;
+        }
+
+        .loading-spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #003399;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部信任背书区域 -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <div class="hero-badges">
+                <div class="badge">
+                    <span class="eu-flag"></span>
+                    <span>基于 EU261 法案</span>
+                </div>
+                <div class="badge">
+                    <span>🤝</span>
+                    <span>合作伙伴：AirHelp</span>
+                </div>
+                <div class="badge">
+                    <span>🔒</span>
+                    <span>独立透明平台</span>
+                </div>
+            </div>
+            <h1>独立航班理赔信息平台<br>全程透明无隐形收费</h1>
+            <p class="hero-subtitle">
+                本平台为独立航班延误理赔信息查询平台，所有理赔服务由第三方合作伙伴 <strong>AirHelp</strong> 提供，合规对接保障权益。<br>
+                我们不隶属于任何航司或 AirHelp 官方，仅提供信息查询和咨询引导服务。
+            </p>
+        </div>
+    </section>
+
+    <!-- 主要内容区域 -->
+    <div class="container">
+        <!-- EU261 法案说明 -->
+        <section class="law-section">
+            <h2>理赔依据：欧盟 EU261 法案</h2>
+            <div class="law-content">
+                <p>
+                    本平台展示的可理赔航班，均基于<strong>欧盟 EU261/2004 号法案</strong>筛选。根据法案规定，凡由欧盟成员国机场起飞、或飞往欧盟成员国且由欧盟航司运营的航班，因航司责任导致以下情况，乘客可获得赔偿：
+                </p>
+                <ul style="margin: 15px 0 15px 30px;">
+                    <li><strong>延误超过 3 小时</strong>到达目的地</li>
+                    <li><strong>航班取消</strong>且未提供合理替代方案</li>
+                    <li><strong>被拒绝登机</strong>（超售等原因）</li>
+                </ul>
+                <p>
+                    赔偿金额为 <strong>€250 - €600</strong> 不等，具体金额根据飞行距离判定：
+                </p>
+                <ul style="margin: 15px 0 15px 30px;">
+                    <li>1,500 公里以内：€250</li>
+                    <li>1,500 - 3,500 公里：€400</li>
+                    <li>3,500 公里以上：€600</li>
+                </ul>
+                <p style="margin-top: 15px; font-size: 14px; color: #999;">
+                    注：不可抗力（恶劣天气、政治动荡等）导致的延误/取消不在赔偿范围内。
+                </p>
+            </div>
+        </section>
+
+        <!-- 可理赔航班列表 -->
+        <section class="flight-section" style="position: relative;">
+            <h2>可理赔航班列表</h2>
+            
+            <!-- 搜索栏 -->
+            <div class="search-bar">
+                <div class="search-form">
+                    <input type="text" id="searchFlightNumber" class="search-input" placeholder="航班号（如：LH123）">
+                    <input type="text" id="searchAirlineName" class="search-input" placeholder="航司名称（如：汉莎航空）">
+                    <input type="date" id="searchScheduledDate" class="search-input" placeholder="计划起飞日期">
+                    <input type="date" id="searchActualDate" class="search-input" placeholder="实际起飞日期">
+                </div>
+                <div class="search-actions">
+                    <button class="search-button search-button-secondary" id="resetButton">重置</button>
+                    <button class="search-button search-button-primary" id="searchButton">搜索</button>
+                </div>
+            </div>
+
+            <!-- 加载遮罩 -->
+            <div class="loading-overlay" id="loadingOverlay">
+                <div class="loading-spinner"></div>
+            </div>
+            
+            <!-- 航班表格 -->
+            <div class="flight-table-wrapper" id="flightTableWrapper">
+                <table class="flight-table">
+                    <thead>
+                        <tr>
+                            <th>航班号</th>
+                            <th>航司名称</th>
+                            <th>计划起飞</th>
+                            <th>计划落地</th>
+                            <th>实际起飞</th>
+                            <th>实际落地</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="flightTableBody">
+                        <!-- 数据将通过 JavaScript 动态加载 -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 空状态 -->
+            <div class="empty-state" id="emptyState" style="display: none;">
+                <p>暂无可理赔航班信息</p>
+                <p style="font-size: 14px; margin-top: 10px;">请尝试调整搜索条件或通过下方咨询通道查询您的航班理赔资格</p>
+            </div>
+
+            <!-- 分页控件 -->
+            <div class="pagination-wrapper" id="paginationWrapper">
+                <div class="pagination-info" id="paginationInfo">
+                    显示第 1-10 条，共 0 条记录
+                </div>
+                <div class="pagination-controls">
+                    <div class="page-size-selector">
+                        <label>每页显示：</label>
+                        <select id="pageSizeSelect">
+                            <option value="10" selected>10 条</option>
+                            <option value="30">30 条</option>
+                            <option value="50">50 条</option>
+                        </select>
+                    </div>
+                    <div class="pagination-nav">
+                        <button class="page-button" id="firstPageButton">首页</button>
+                        <button class="page-button" id="prevPageButton">上一页</button>
+                        <input type="number" id="pageInput" class="page-input" min="1" value="1">
+                        <span id="totalPagesText">/ 1</span>
+                        <button class="page-button" id="nextPageButton">下一页</button>
+                        <button class="page-button" id="lastPageButton">末页</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 引导模块 -->
+        <section class="cta-section">
+            <h3>如何使用本平台？</h3>
+            <p class="cta-content">
+                1. 使用上方搜索栏查找您的航班信息<br>
+                2. 在航班列表中找到您的航班<br>
+                3. 点击"检查理赔资格"按钮，跳转至 AirHelp 官方合作通道进行理赔资格审核<br>
+                <strong>注：最终理赔资格和赔偿金额以 AirHelp 审核结果为准</strong>
+            </p>
+        </section>
+    </div>
+
+    <!-- 悬浮按钮 -->
+    <a href="#" class="floating-button" id="floatingButton">
+        检查理赔资格
+    </a>
+
+    <!-- 底部区域 -->
+    <footer class="footer-section">
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div>
+                    <h4>平台说明</h4>
+                    <p>
+                        本平台为独立航班理赔信息服务平台，与 AirHelp 为合法合作关系，不隶属于任何航司或 AirHelp 官方。
+                        我们致力于为乘客提供透明、专业的理赔信息查询服务。
+                    </p>
+                </div>
+                <div>
+                    <h4>免责声明</h4>
+                    <p>
+                        可理赔航班列表仅供参考，最终理赔资格、赔偿金额以 AirHelp 依据 EU261 法案及航司规则审核结果为准。
+                        本平台不承诺 100% 理赔成功，不收取任何咨询费、代办费。
+                    </p>
+                </div>
+                <div>
+                    <h4>合规链接</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32004R0261" target="_blank">EU261 法案官方查询</a></li>
+                        <li><a href="https://www.airhelp.com" target="_blank">AirHelp 官方网站</a></li>
+                        <li><a href="https://europa.eu/youreurope/citizens/travel/passenger-rights/air/index_en.htm" target="_blank">欧盟乘客权利指南</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 独立航班理赔信息平台 | 本平台仅提供信息查询服务，不代表任何官方机构</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        document.addEventListener('DOMContentLoaded', function() {
+            const shortId = /*[[${shortId}]]*/ 'demo';
+            const targetUrl = /*[[${airhelpUrl}]]*/ 'https://airhelp.tpo.li/I23Fh9CN';
+            
+            // 搜索和分页状态
+            let currentPage = 0;
+            let pageSize = 10;
+            let searchParams = {};
+            
+            // DOM 元素
+            const searchFlightNumber = document.getElementById('searchFlightNumber');
+            const searchAirlineName = document.getElementById('searchAirlineName');
+            const searchScheduledDate = document.getElementById('searchScheduledDate');
+            const searchActualDate = document.getElementById('searchActualDate');
+            const searchButton = document.getElementById('searchButton');
+            const resetButton = document.getElementById('resetButton');
+            
+            const flightTableBody = document.getElementById('flightTableBody');
+            const flightTableWrapper = document.getElementById('flightTableWrapper');
+            const emptyState = document.getElementById('emptyState');
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            const paginationWrapper = document.getElementById('paginationWrapper');
+            const paginationInfo = document.getElementById('paginationInfo');
+            
+            const pageSizeSelect = document.getElementById('pageSizeSelect');
+            const pageInput = document.getElementById('pageInput');
+            const totalPagesText = document.getElementById('totalPagesText');
+            const firstPageButton = document.getElementById('firstPageButton');
+            const prevPageButton = document.getElementById('prevPageButton');
+            const nextPageButton = document.getElementById('nextPageButton');
+            const lastPageButton = document.getElementById('lastPageButton');
+            
+            // 加载航班数据
+            async function loadFlights() {
+                try {
+                    loadingOverlay.classList.add('active');
+                    
+                    const params = new URLSearchParams({
+                        page: currentPage,
+                        size: pageSize,
+                        ...searchParams
+                    });
+                    
+                    const response = await fetch(`/api/flights/search?${params}`);
+                    const data = await response.json();
+                    
+                    renderFlights(data);
+                    updatePagination(data);
+                    
+                } catch (error) {
+                    console.error('Error loading flights:', error);
+                    showEmptyState();
+                } finally {
+                    loadingOverlay.classList.remove('active');
+                }
+            }
+            
+            // 渲染航班列表
+            function renderFlights(data) {
+                if (!data.flights || data.flights.length === 0) {
+                    showEmptyState();
+                    return;
+                }
+                
+                flightTableWrapper.style.display = 'block';
+                emptyState.style.display = 'none';
+                paginationWrapper.style.display = 'flex';
+                
+                flightTableBody.innerHTML = data.flights.map(flight => `
+                    <tr>
+                        <td><strong>${flight.flightNumber}</strong></td>
+                        <td>${flight.airlineName}</td>
+                        <td>${flight.scheduledDeparture}</td>
+                        <td>${flight.scheduledArrival}</td>
+                        <td class="delay-indicator">${flight.actualDeparture}</td>
+                        <td class="delay-indicator">${flight.actualArrival}</td>
+                        <td>
+                            <button class="check-button" onclick="checkCompensation('${flight.flightNumber}')">
+                                检查理赔资格
+                            </button>
+                        </td>
+                    </tr>
+                `).join('');
+            }
+            
+            // 显示空状态
+            function showEmptyState() {
+                flightTableWrapper.style.display = 'none';
+                emptyState.style.display = 'block';
+                paginationWrapper.style.display = 'none';
+            }
+            
+            // 更新分页信息
+            function updatePagination(data) {
+                const start = data.currentPage * data.pageSize + 1;
+                const end = Math.min((data.currentPage + 1) * data.pageSize, data.totalElements);
+                
+                paginationInfo.textContent = `显示第 ${start}-${end} 条，共 ${data.totalElements} 条记录`;
+                
+                pageInput.value = data.currentPage + 1;
+                pageInput.max = data.totalPages;
+                totalPagesText.textContent = `/ ${data.totalPages}`;
+                
+                firstPageButton.disabled = data.currentPage === 0;
+                prevPageButton.disabled = data.currentPage === 0;
+                nextPageButton.disabled = data.currentPage >= data.totalPages - 1;
+                lastPageButton.disabled = data.currentPage >= data.totalPages - 1;
+            }
+            
+            // 搜索按钮
+            searchButton.addEventListener('click', function() {
+                searchParams = {};
+                
+                if (searchFlightNumber.value.trim()) {
+                    searchParams.flightNumber = searchFlightNumber.value.trim();
+                }
+                if (searchAirlineName.value.trim()) {
+                    searchParams.airlineName = searchAirlineName.value.trim();
+                }
+                if (searchScheduledDate.value) {
+                    searchParams.scheduledDepartureDate = searchScheduledDate.value;
+                }
+                if (searchActualDate.value) {
+                    searchParams.actualDepartureDate = searchActualDate.value;
+                }
+                
+                currentPage = 0;
+                loadFlights();
+            });
+            
+            // 重置按钮
+            resetButton.addEventListener('click', function() {
+                searchFlightNumber.value = '';
+                searchAirlineName.value = '';
+                searchScheduledDate.value = '';
+                searchActualDate.value = '';
+                searchParams = {};
+                currentPage = 0;
+                loadFlights();
+            });
+            
+            // 每页条数选择
+            pageSizeSelect.addEventListener('change', function() {
+                pageSize = parseInt(this.value);
+                currentPage = 0;
+                loadFlights();
+            });
+            
+            // 页码输入
+            pageInput.addEventListener('change', function() {
+                const page = parseInt(this.value) - 1;
+                if (page >= 0 && page < parseInt(pageInput.max)) {
+                    currentPage = page;
+                    loadFlights();
+                }
+            });
+            
+            // 分页按钮
+            firstPageButton.addEventListener('click', function() {
+                currentPage = 0;
+                loadFlights();
+            });
+            
+            prevPageButton.addEventListener('click', function() {
+                if (currentPage > 0) {
+                    currentPage--;
+                    loadFlights();
+                }
+            });
+            
+            nextPageButton.addEventListener('click', function() {
+                currentPage++;
+                loadFlights();
+            });
+            
+            lastPageButton.addEventListener('click', function() {
+                currentPage = parseInt(pageInput.max) - 1;
+                loadFlights();
+            });
+            
+            // 初始加载
+            loadFlights();
+            
+            // 检查理赔资格按钮点击事件（全局函数）
+            window.checkCompensation = async function(flightNumber) {
+                try {
+                    // 记录按钮点击事件
+                    await fetch('/api/button-click', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            clickEventId: null,
+                            shortId: shortId
+                        })
+                    });
+                    
+                    // 短暂延迟后跳转
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                } catch (error) {
+                    console.error('Error recording button click:', error);
+                }
+                
+                // 跳转到 AirHelp
+                window.location.href = targetUrl;
+            };
+            
+            // 悬浮按钮点击事件
+            const floatingButton = document.getElementById('floatingButton');
+            floatingButton.addEventListener('click', async function(event) {
+                event.preventDefault();
+                
+                try {
+                    // 记录按钮点击事件
+                    await fetch('/api/button-click', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            clickEventId: null,
+                            shortId: shortId
+                        })
+                    });
+                    
+                    // 短暂延迟后跳转
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                } catch (error) {
+                    console.error('Error recording button click:', error);
+                }
+                
+                // 跳转到目标 URL
+                window.location.href = targetUrl;
+            });
+        });
+        /*]]>*/
+    </script>
+</body>
+</html>

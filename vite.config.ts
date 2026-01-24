@@ -17,6 +17,16 @@ export default defineConfig({
     host: true, // 监听所有地址
     port: 3000,
     proxy: {
+      '^/api/flights/.*': {
+        target: 'http://localhost:3001', // 航班查询服务器端口
+        changeOrigin: true,
+        secure: false,
+      },
+      '^/api/tracker/.*': {
+        target: 'http://localhost:3001', // 追踪服务器端口
+        changeOrigin: true,
+        secure: false,
+      },
       '^/api/.*': {
         target: 'http://localhost:8088',
         // target:  'https://api.wristo.io',
