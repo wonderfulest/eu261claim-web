@@ -23,7 +23,7 @@
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 15px;">
             <input v-model="search.flightNumber" placeholder="Flight Number" style="padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
             <input v-model="search.airlineName" placeholder="Airline Name" style="padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
-            <input v-model="search.scheduledDate" type="date" style="padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+            <input v-model="search.scheduledDate" type="date" lang="en" style="padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
           </div>
           <div style="display: flex; gap: 10px; justify-content: flex-end;">
             <button @click="resetSearch" style="padding: 10px 25px; background: #6c757d; color: white; border: none; border-radius: 6px; cursor: pointer;">Reset</button>
@@ -123,10 +123,12 @@ async function loadFlights() {
     if (search.value.scheduledDate) params.scheduledDepartureDate = search.value.scheduledDate;
     
     const res = await axios.get('/api/flights/search', { params });
-    flights.value = res.data.flights;
-    page.value = res.data.currentPage;
-    total.value = res.data.totalElements;
-    totalPages.value = res.data.totalPages;
+    // Java API returns Result wrapper: { code, msg, data: { flights, currentPage, ... } }
+    const responseData = res.data.data || res.data; // Handle both wrapped and unwrapped responses
+    flights.value = responseData.flights || [];
+    page.value = responseData.currentPage || 0;
+    total.value = responseData.totalElements || 0;
+    totalPages.value = responseData.totalPages || 1;
   } catch (error) {
     console.error('Error loading flights:', error);
     flights.value = [];

@@ -6,7 +6,7 @@
     @click="toggle"
     @blur="collapse"
   >
-    <!-- 桌面端布局 -->
+    <!-- Desktop layout -->
     <div v-if="!isExpanded && !isMobile" class="footer-main desktop-layout">
       © 2025 CHEERY LTD |
       <a href="/terms-and-conditions">Terms of Use</a> |
@@ -15,7 +15,7 @@
       <!-- <a href="/faq">FAQ</a> -->
     </div>
     
-    <!-- 移动端布局 -->
+    <!-- Mobile layout -->
     <div v-if="!isExpanded && isMobile" class="footer-main mobile-layout">
       <div class="mobile-footer-header">
         <div class="drag-indicator"></div>
@@ -89,24 +89,24 @@ const isVisible = ref(true)
 const isMobile = ref(false)
 let ticking = false
 
-// 滚动到顶部功能
+// Scroll to top function
 const scrollToTop = () => {
   window.scrollTo({
     top: 0,
     behavior: 'smooth'
   })
-  // 滚动后隐藏footer
+  // Hide footer after scrolling
   setTimeout(() => {
     isVisible.value = false
   }, 500)
 }
 
-// 
+// Check if mobile
 function checkMobile() {
   isMobile.value = window.innerWidth <= 768
 }
 
-// 
+// Handle scroll
 function handleScroll() {
   if (!ticking && isMobile.value) {
     requestAnimationFrame(updateFooterVisibility)
@@ -114,21 +114,21 @@ function handleScroll() {
   }
 }
 
-// 
+// Update footer visibility
 function updateFooterVisibility() {
   const currentScrollY = window.scrollY
   const windowHeight = window.innerHeight
   const documentHeight = document.documentElement.scrollHeight
   
-  // 
+  // Distance from bottom
   const distanceFromBottom = documentHeight - (currentScrollY + windowHeight)
   
-  // 
+  // Show footer when near bottom
   if (distanceFromBottom <= 100) {
     isVisible.value = true
   } else {
     isVisible.value = false
-    // 
+    // Collapse if expanded
     if (isExpanded.value) {
       isExpanded.value = false
     }
@@ -137,11 +137,11 @@ function updateFooterVisibility() {
   ticking = false
 }
 
-// 
+// Handle resize
 function handleResize() {
   checkMobile()
   if (!isMobile.value) {
-    isVisible.value = true // 
+    isVisible.value = true // Always visible on desktop
   }
 }
 
@@ -156,11 +156,11 @@ function collapse() {
 onMounted(() => {
   checkMobile()
   if (isMobile.value) {
-    // 
+    // Add scroll listener
     isVisible.value = false
     window.addEventListener('scroll', handleScroll, { passive: true })
     window.addEventListener('resize', handleResize)
-    // 
+    // Initial check
     updateFooterVisibility()
   }
 })
@@ -184,7 +184,7 @@ onUnmounted(() => {
   outline: none;
   transition: all 0.3s ease;
   position: relative;
-  min-height: 24px; /* 最小高度 */
+  min-height: 24px; /* Minimum height */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -192,7 +192,7 @@ onUnmounted(() => {
   border-top: 1px solid #e5e7eb;
 }
 
-/* */
+/* Mobile styles */
 @media (max-width: 768px) {
   .footer {
     position: fixed;
@@ -221,7 +221,7 @@ onUnmounted(() => {
     backdrop-filter: blur(25px);
   }
   
-  /* */
+  /* Mobile layout */
   .mobile-layout {
     width: 100%;
     padding: 0;
@@ -308,7 +308,7 @@ onUnmounted(() => {
     border-top: 1px solid rgba(0, 0, 0, 0.1);
   }
   
-  /* */
+  /* Desktop layout visible */
   .desktop-layout {
     display: block;
   }
@@ -318,7 +318,7 @@ onUnmounted(() => {
   }
 }
 
-/* */
+/* Desktop styles */
 @media (min-width: 769px) {
   .desktop-layout {
     display: block;

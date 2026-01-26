@@ -18,12 +18,12 @@ export default defineConfig({
     port: 3000,
     proxy: {
       '^/api/flights/.*': {
-        target: 'http://localhost:3001', // 航班查询服务器端口
+        target: 'http://localhost:9000', // Java API 端口
         changeOrigin: true,
         secure: false,
       },
       '^/api/tracker/.*': {
-        target: 'http://localhost:3001', // 追踪服务器端口
+        target: 'http://localhost:9000', // Java API 端口
         changeOrigin: true,
         secure: false,
       },
