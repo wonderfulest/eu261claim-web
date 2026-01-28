@@ -7,7 +7,7 @@
       <p class="desc subtle">You’ll continue receiving only the types of messages you selected.</p>
 
       <div class="actions">
-        <a class="btn primary" :href="homeUrl" target="_self">Back to Wristo.io</a>
+        <a class="btn primary" :href="homeUrl" target="_self">Back to eu261claim.com</a>
         <router-link class="btn ghost" :to="{ name: 'EmailPreferences', query: { email } }" @click="cancelTimer">Edit Again</router-link>
       </div>
 
@@ -22,7 +22,7 @@ import { useRoute } from 'vue-router'
 
 const route = useRoute()
 const email = (route.query.email as string) || ''
-const homeUrl = 'https://www.wristo.io'
+const homeUrl = 'https://www.eu261claim.com/'
 const countdown = ref(3)
 let timer: number | null = null
 

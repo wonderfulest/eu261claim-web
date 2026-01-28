@@ -217,7 +217,7 @@
                   <div class="preference-main">
                     <span class="preference-title">Surveys & feedback</span>
                   </div>
-                  <p class="preference-desc">Help us improve Wristo products</p>
+                  <p class="preference-desc">Help us improve EU261 Claim</p>
                 </div>
                 <div class="toggle-wrapper">
                   <input type="checkbox" v-model="form.surveysFeedback" class="toggle-input" />

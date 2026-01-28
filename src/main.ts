@@ -8,6 +8,9 @@ import { createPinia } from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import { useGA } from './plugins/ga'
 
+const storedTheme = localStorage.getItem('theme')
+document.documentElement.dataset.theme = storedTheme === 'light' ? 'light' : 'dark'
+
 const app = createApp(App)
 const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)

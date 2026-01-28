@@ -24,7 +24,7 @@
     </nav>
     <div class="privacy-content">
       <h2 id="collection">1. Collection of Personal Information</h2>
-      <p>Wristo.io (operated by WuKong OÜ) collects your email address solely for the purpose of providing order confirmations, digital product delivery, and essential service updates. You may choose not to provide your email, but this may prevent us from fulfilling your order or providing support.</p>
+      <p>EU261 Claim (operated by WuKong OÜ) collects your email address solely for the purpose of providing service updates and essential communication related to your flight compensation claim. You may choose not to provide your email, but this may prevent us from providing support.</p>
 
       <h2 id="use">2. Use of Information</h2>
       <ul>
@@ -40,12 +40,12 @@
       <p>We do not use cookies, web beacons, or any tracking technologies on our website.</p>
 
       <h2 id="disclosure">5. Disclosure to Third Parties</h2>
-      <p>We do not sell, trade, or otherwise transfer your personal information to outside parties except as required by law, regulation, or valid legal process. Payment information is handled exclusively by third-party payment processors (e.g., Paddle.com) and is never stored or processed by Wristo.io.</p>
+      <p>We do not sell, trade, or otherwise transfer your personal information to outside parties except as required by law, regulation, or valid legal process. Payment information (if any) is handled exclusively by third-party payment processors and is never stored or processed by EU261 Claim.</p>
 
       <h2 id="consent">6. Your Rights & Consent</h2>
       <p>By using our site and services, you consent to this Privacy Policy and the limited use of your information as described above. You have the right to:</p>
       <ul>
-        <li>Request access to or deletion of your personal data by contacting us at <a href="mailto:support@wristo.io">support@wristo.io</a>.</li>
+        <li>Request access to or deletion of your personal data by contacting us at <a href="mailto:support@eu261claim.com">support@eu261claim.com</a>.</li>
         <li>Withdraw your consent at any time, which may affect your ability to use our services.</li>
       </ul>
 
@@ -59,7 +59,7 @@
       <p>If you have any questions, requests, or concerns regarding this Privacy Policy or your personal data, please contact us:</p>
       <p><strong>Business Name:</strong> WuKong OÜ</p>
       <p><strong>Address:</strong> Harju maakond, Tallinn, Kesklinna linnaosa, Ahtri tn 12, 15551, Estonia</p>
-      <p><strong>E-mail:</strong> <a href="mailto:support@wristo.io">support@wristo.io</a></p>
+      <p><strong>E-mail:</strong> <a href="mailto:support@eu261claim.com">support@eu261claim.com</a></p>
     </div>
   </div>
 </template>

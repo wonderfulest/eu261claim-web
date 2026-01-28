@@ -2,8 +2,7 @@
   <header class="header-bar">
     <div class="header-inner">
       <router-link to="/" class="brand">
-        <span class="brand-mark">EU</span>
-        <span class="brand-text">261 Claim</span>
+        <img class="brand-logo" :src="logo" alt="EU261 Claim" />
       </router-link>
 
       <button class="mobile-menu-btn" type="button" @click="toggleMobileMenu">
@@ -17,6 +16,9 @@
         <!-- <router-link to="/how-it-works" class="nav-link" :class="{ active: isActive('/how-it-works') }">How It Works</router-link> -->
         <!-- <router-link to="/faq" class="nav-link" :class="{ active: isActive('/faq') }">FAQ</router-link> -->
         <!-- <button class="nav-cta" type="button" @click="goToNewClaim">Start a claim</button> -->
+        <button class="theme-toggle" type="button" @click="toggleTheme">
+          {{ themeLabel }}
+        </button>
       </nav>
     </div>
 
@@ -25,6 +27,9 @@
         <router-link to="/" class="mobile-link" @click="closeMobile">Home</router-link>
         <router-link to="/how-it-works" class="mobile-link" @click="closeMobile">How It Works</router-link>
         <router-link to="/faq" class="mobile-link" @click="closeMobile">FAQ</router-link>
+        <button class="mobile-theme-toggle" type="button" @click="toggleTheme">
+          {{ themeLabel }}
+        </button>
         <button class="mobile-cta" type="button" @click="handleMobileStart">Start a claim</button>
       </nav>
     </div>
@@ -32,13 +37,24 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import logo from '@/assets/favicon/favicon-long.png'
 
 const router = useRouter()
 const route = useRoute()
 
 const isMobileOpen = ref(false)
+
+const theme = ref<'dark' | 'light'>((document.documentElement.dataset.theme as 'dark' | 'light') || 'dark')
+
+const themeLabel = computed(() => (theme.value === 'dark' ? 'Light' : 'Dark'))
+
+const toggleTheme = () => {
+  theme.value = theme.value === 'dark' ? 'light' : 'dark'
+  document.documentElement.dataset.theme = theme.value
+  localStorage.setItem('theme', theme.value)
+}
 
 const goToNewClaim = () => {
   router.push({ name: 'ClaimNew' })
@@ -65,8 +81,11 @@ const handleMobileStart = () => {
 <style scoped>
 .header-bar {
   width: 100%;
-  background: #ffffff;
-  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+  background: rgba(20, 20, 26, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border-default, #262630);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
   position: sticky;
   top: 0;
   z-index: 30;
@@ -89,11 +108,17 @@ const handleMobileStart = () => {
   text-decoration: none;
 }
 
+.brand-logo {
+  height: 28px;
+  width: auto;
+  display: block;
+}
+
 .brand-mark {
   width: 28px;
   height: 28px;
   border-radius: 999px;
-  background: #0b7bd4;
+  background: var(--color-cta, #3b82f6);
   color: #ffffff;
   font-weight: 700;
   font-size: 14px;
@@ -105,7 +130,7 @@ const handleMobileStart = () => {
 .brand-text {
   font-weight: 700;
   font-size: 18px;
-  color: #0f172a;
+  color: var(--text-primary, #e6e6e6);
 }
 
 .nav {
@@ -114,21 +139,40 @@ const handleMobileStart = () => {
   gap: 18px;
 }
 
+.theme-toggle {
+  height: 34px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border-default, #262630);
+  background: rgba(14, 14, 17, 0.5);
+  color: var(--text-primary, #e6e6e6);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.theme-toggle:hover {
+  background: rgba(59, 130, 246, 0.14);
+  border-color: rgba(96, 165, 250, 0.45);
+  color: var(--color-cta-hover, #60a5fa);
+}
+
 .nav-link {
   font-size: 14px;
-  color: #4b5563;
+  color: var(--text-secondary, #9aa0a6);
   text-decoration: none;
   padding: 4px 0;
 }
 
 .nav-link:hover {
-  color: #0b7bd4;
+  color: var(--color-cta-hover, #60a5fa);
 }
 
 .nav-link.active {
-  color: #0b7bd4;
+  color: var(--color-cta, #3b82f6);
   font-weight: 600;
-  border-bottom: 2px solid #0b7bd4;
+  border-bottom: 2px solid var(--color-cta, #3b82f6);
 }
 
 .nav-cta {
@@ -303,7 +347,7 @@ const handleMobileStart = () => {
 .mobile-menu-btn span {
   width: 20px;
   height: 2px;
-  background: #333;
+  background: var(--text-primary, #e6e6e6);
   border-radius: 1px;
   transition: all 0.3s ease;
   margin: 2px 0;
@@ -328,7 +372,7 @@ const handleMobileStart = () => {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(255, 255, 255, 0.98);
+  background: rgba(14, 14, 17, 0.92);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   transform: translateX(-100%);
@@ -339,6 +383,24 @@ const handleMobileStart = () => {
 
 .mobile-nav.open {
   transform: translateX(0);
+}
+
+.mobile-theme-toggle {
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border-default, #262630);
+  background: rgba(20, 20, 26, 0.6);
+  color: var(--text-primary, #e6e6e6);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.mobile-theme-toggle:hover {
+  background: rgba(59, 130, 246, 0.14);
+  border-color: rgba(96, 165, 250, 0.45);
+  color: var(--color-cta-hover, #60a5fa);
 }
 
 .mobile-nav-content {

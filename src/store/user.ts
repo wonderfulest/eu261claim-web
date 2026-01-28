@@ -45,7 +45,7 @@ export const useUserStore = defineStore('user', {
     }
   },
   persist: {
-    key: 'wristo-user',
+    key: 'eu261claim-user',
     storage: sessionStorage
   }
 })

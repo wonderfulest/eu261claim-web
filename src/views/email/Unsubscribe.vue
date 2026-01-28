@@ -12,7 +12,7 @@
         </div>
         <div class="header-content">
           <h1 class="page-title">Unsubscribe</h1>
-          <p class="page-subtitle">Stop receiving marketing emails from Wristo</p>
+          <p class="page-subtitle">Stop receiving marketing emails from EU261 Claim</p>
         </div>
       </div>
 
@@ -26,7 +26,7 @@
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
           <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        <span>You have been unsubscribed from Wristo newsletters</span>
+        <span>You have been unsubscribed from EU261 Claim newsletters</span>
       </div>
       
       <div v-if="error" class="status-message error">
@@ -75,7 +75,7 @@
         <router-link :to="{ name: 'EmailPreferences', query: { email: emailModel } }" class="manage-button">
           Manage Email Preferences
         </router-link>
-        <a href="https://www.wristo.io" class="home-button">Back to Wristo.io</a>
+        <a href="https://www.eu261claim.com/" class="home-button">Back to eu261claim.com</a>
       </div>
 
       <!-- Footer -->

@@ -22,7 +22,9 @@ import Footer from './Footer.vue'
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(180deg, #0b7bd4 0%, #e5f2ff 38%, #f7f8fa 80%, #f7f8fa 100%);
+  background: radial-gradient(1100px 500px at 50% -120px, rgba(59, 130, 246, 0.22) 0%, rgba(14, 14, 17, 0) 60%),
+    radial-gradient(900px 420px at 50% 10%, rgba(229, 72, 77, 0.1) 0%, rgba(14, 14, 17, 0) 65%),
+    var(--bg-page);
   width: 100vw;
   max-width: 100vw;
   overflow-x: hidden;
@@ -74,6 +76,6 @@ import Footer from './Footer.vue'
 
 /* 确保所有子元素不超出容器宽度 */
 .layout-root *:not(svg):not(path) {
-  /* max-width: 100%; */
+  min-width: 0;
 }
 </style> 

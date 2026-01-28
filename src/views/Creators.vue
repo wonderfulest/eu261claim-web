@@ -5,7 +5,7 @@
         <p class="creators-badge">For Garmin Watch Face Designers</p>
         <h1 class="creators-title">
           <span>Become a</span>
-          <span class="highlight">Wristo Creator</span>
+          <span class="highlight">EU261 Claim Creator</span>
         </h1>
         <p class="creators-subtitle">
           Free to start. Let your work speak. Unlock data. Build long-term
@@ -50,7 +50,7 @@
           >
             <article class="stage-card">
               <h3 class="stage-title">🌱 Stage 1 · Free Creator</h3>
-              <p class="stage-subtitle">You just joined Wristo.</p>
+              <p class="stage-subtitle">You just joined EU261 Claim.</p>
               <p class="section-text">You can:</p>
               <ul class="bullet-list">
                 <li>✅ Use the full design toolset</li>
@@ -172,7 +172,7 @@
       </section>
 
       <section class="creators-section why">
-        <h2 class="section-title">Why Wristo?</h2>
+        <h2 class="section-title">Why EU261 Claim?</h2>
         <ul class="bullet-list">
           <li>
             🎨 A creation platform built specifically for Garmin watch face
@@ -202,7 +202,7 @@
       </section>
 
       <section class="creators-section promise">
-        <h2 class="section-title">🤝 Wristo's Promise</h2>
+        <h2 class="section-title">🤝 EU261 Claim's Promise</h2>
         <ul class="bullet-list">
           <li>📜 All rules are open and transparent</li>
           <li>📊 All permissions are based on real data</li>
@@ -220,10 +220,10 @@
           <br />
           Users choose.
           <br />
-          Wristo amplifies the value.
+          EU261 Claim amplifies the value.
         </blockquote>
         <p class="section-text">
-          If you are already creating, Wristo has prepared the stage for you.
+          If you are already creating, EU261 Claim has prepared the stage for you.
         </p>
         <div class="creators-cta-inline">
           <button class="btn-primary" @click="handleStart">
@@ -244,7 +244,7 @@ const activeStage = ref(0);
 
 // CTA handlers are placeholders for future integration
 const handleStart = () => {
-  window.open("https://studio.wristo.io/", "_blank");
+  window.open("https://www.eu261claim.com/", "_blank");
 };
 
 const revealFirstStage = () => {

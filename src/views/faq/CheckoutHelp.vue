@@ -35,7 +35,7 @@ import step5 from '@/assets/checkout/checkout_05.jpg'
 import { ref } from 'vue'
 const steps = [
   { text: 'Install the Connect IQ Store app on your watch and trial until the code appears.', img: step1 },
-  { text: 'Open the link https://www.wristo.io/code and enter the code on the watch face.', img: step2 },
+  { text: 'Open the link https://www.eu261claim.com/code and enter the code on the watch face.', img: step2 },
   { text: 'Choose your product or bundle and click Proceed to Checkout. ', img: step3 },
   { text: 'Enter your email address for the receipt. ', img: step4 },
   { text: 'Select your payment method and complete the payment via Paddle.', img: step5 },

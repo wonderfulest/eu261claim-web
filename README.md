@@ -1,6 +1,6 @@
 # 路由
 
-wristo.io/
+https://www.eu261claim.com/
 ├──-------------------- Home --------------------
 ├── /                          → Home
 ├── /product/:id               → Product Detail

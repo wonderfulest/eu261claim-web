@@ -1,0 +1,41 @@
+:root {
+  /* Theme tokens (default: dark, blue-black) */
+  --bg-page: #0e0e11;
+  --bg-surface: #14141a;
+  --bg-table: var(--bg-surface);
+  --bg-row-hover: #1c1c24;
+
+  --text-primary: #e6e6e6;
+  --text-secondary: #9aa0a6;
+
+  --border-default: #262630;
+
+  --color-alert: #e5484d;
+  --color-eligible: #2ecc71;
+
+  --color-cta: #3b82f6;
+  --color-cta-hover: #60a5fa;
+
+  color-scheme: dark;
+}
+
+:root[data-theme='light'] {
+  /* Light theme (sky blue) */
+  --bg-page: #eaf3ff;
+  --bg-surface: #ffffff;
+  --bg-table: var(--bg-surface);
+  --bg-row-hover: #f0f7ff;
+
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+
+  --border-default: #dbeafe;
+
+  --color-alert: #dc2626;
+  --color-eligible: #16a34a;
+
+  --color-cta: #0ea5e9;
+  --color-cta-hover: #38bdf8;
+
+  color-scheme: light;
+}

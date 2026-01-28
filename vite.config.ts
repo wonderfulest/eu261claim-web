@@ -15,11 +15,11 @@ export default defineConfig({
   },
   server: {
     host: true, // 监听所有地址
-    port: 3000,
+    port: 9003,
     proxy: {
       '^/api/.*': {
-        target: 'http://localhost:8088',
-        // target:  'https://api.wristo.io',
+        target: 'http://localhost:9000',
+        // target:  'https://www.eu261claim.com',
         changeOrigin: true,
         secure: false,
         // rewrite: (path) => path.replace(/^\/api/, ''),

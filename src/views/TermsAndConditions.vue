@@ -24,12 +24,12 @@
     </nav>
     <div class="terms-content">
       <h2 id="ownership">1. Ownership of Site</h2>
-      <p>These Terms and Conditions of Use (the "Terms of Use") apply to the Wristo website located at <a href="https://www.wristo.io" target="_blank">www.wristo.io</a>, and all associated sites linked to www.wristo.io by WuKong OÜ and its affiliates (collectively, the "Site"). The Site is the property of WuKong OÜ ("Wukong") and its licensors.</p>
+      <p>These Terms and Conditions of Use (the "Terms of Use") apply to the EU261 Claim website located at <a href="https://www.eu261claim.com/" target="_blank">www.eu261claim.com</a>, and all associated sites linked to www.eu261claim.com by WuKong OÜ and its affiliates (collectively, the "Site"). The Site is the property of WuKong OÜ ("Wukong") and its licensors.</p>
       <p><strong>BY USING THE SITE, YOU AGREE TO THESE TERMS OF USE; IF YOU DO NOT AGREE, DO NOT USE THE SITE.</strong></p>
       <p>Wukong reserves the right, at its sole discretion, to change, modify, add, or remove portions of these Terms of Use at any time. It is your responsibility to check these Terms of Use periodically for updates. Your continued use of the Site following the posting of changes will mean that you accept and agree to the changes. As long as you comply with these Terms of Use, Wukong grants you a personal, non-exclusive, non-transferable, limited privilege to enter and use the Site.</p>
 
       <h2 id="products">2. Products and License of Use</h2>
-      <p>Wristo.io offers downloadable digital watch faces ("Products") for Garmin smartwatches. By purchasing or accessing any Product from the Site, you are granted a limited, non-exclusive, non-transferable, and revocable license to download, install, and use such Products solely for your personal, non-commercial use on compatible devices.</p>
+      <p>EU261 Claim offers flight compensation services ("Services"). By accessing any Services from the Site, you are granted a limited, non-exclusive, non-transferable, and revocable license to use such Services solely for your personal, non-commercial use.</p>
       <ul>
         <li>The license granted does <strong>not</strong> constitute a sale of the Product or any intellectual property rights therein.</li>
         <li>You shall <strong>not</strong> sublicense, resell, redistribute, copy, reproduce, modify, or otherwise exploit the Products for any commercial purpose.</li>
@@ -49,9 +49,9 @@
       <p>WuKong OÜ reserves the right to modify the pricing of Products at any time without prior notice, and such changes shall not affect any purchases already completed.</p>
 
       <h2 id="refund">4. Refund Policy</h2>
-      <p>Wristo.io offers a <strong>7-day refund period</strong> from the date of purchase for all digital Products, subject to the following conditions:</p>
+      <p>EU261 Claim offers a <strong>7-day refund period</strong> from the date of purchase for all Services, subject to the following conditions:</p>
       <ul>
-        <li>To request a refund, you must contact us at <a href="mailto:support@wristo.io">support@wristo.io</a> within seven (7) calendar days of the original purchase date.</li>
+        <li>To request a refund, you must contact us at <a href="mailto:support@eu261claim.com">support@eu261claim.com</a> within seven (7) calendar days of the original purchase date.</li>
         <li>Your request must include <strong>valid proof of purchase</strong>, such as the transaction ID, order confirmation, or payment receipt.</li>
         <li>Refunds will only be issued to the original payment method used at the time of purchase.</li>
         <li>Refunds are granted at the sole discretion of WuKong OÜ and are intended to address cases such as accidental purchases, technical incompatibility, or non-functionality of the Product.</li>
@@ -73,10 +73,10 @@
         <li>Any behavioral, biometric, or demographic data.</li>
       </ul>
       <p>By using the Site, you acknowledge and consent to this limited data collection and usage strictly for transactional communication.</p>
-      <p>For further information regarding how we handle your data, or to request data deletion, please contact us at <a href="mailto:support@wristo.io">support@wristo.io</a>.</p>
+      <p>For further information regarding how we handle your data, or to request data deletion, please contact us at <a href="mailto:support@eu261claim.com">support@eu261claim.com</a>.</p>
 
       <h2 id="acceptable">6. Acceptable Use</h2>
-      <p>As a condition of your use of the Site and Products, you agree that you will not use the Site, Services, or any Products purchased through Wristo.io:</p>
+      <p>As a condition of your use of the Site and Services, you agree that you will not use the Site or Services through EU261 Claim:</p>
       <ul>
         <li>For any <strong>unlawful, fraudulent, or malicious purpose</strong>;</li>
         <li>In any manner that <strong>could disable, damage, interfere with, or disrupt</strong> the Site or any other party's use of the Site;</li>
@@ -88,7 +88,7 @@
       <p>WuKong OÜ reserves the right to monitor use of the Site and to suspend or terminate access to any user who violates this Acceptable Use Policy, with or without notice, at its sole discretion.</p>
 
       <h2 id="disclaimer">7. Disclaimer</h2>
-      <p>All digital Products offered through Wristo.io are provided on an <strong>"as is"</strong> and <strong>"as available"</strong> basis, without warranties of any kind, either express or implied.</p>
+      <p>All Services offered through EU261 Claim are provided on an <strong>"as is"</strong> and <strong>"as available"</strong> basis, without warranties of any kind, either express or implied.</p>
       <p>To the fullest extent permitted by applicable law, WuKong OÜ <strong>disclaims all warranties</strong>, including but not limited to:</p>
       <ul>
         <li><strong>Implied warranties of merchantability</strong>, fitness for a particular purpose, and non-infringement;</li>
@@ -111,13 +111,13 @@
 
       <h2 id="law">9. Governing Law and Jurisdiction</h2>
       <p>These Terms of Use shall be governed by and construed in accordance with the <strong>laws of the Republic of Estonia</strong>, without regard to its conflict of law provisions.</p>
-      <p>Any dispute, controversy, or claim arising out of or relating to these Terms, your use of the Site, or any Products purchased via Wristo.io shall be <strong>submitted to the exclusive jurisdiction of the courts of Estonia</strong>, with <strong>Tallinn, Harju County</strong> as the agreed legal venue.</p>
+      <p>Any dispute, controversy, or claim arising out of or relating to these Terms, your use of the Site, or any Services used via EU261 Claim shall be <strong>submitted to the exclusive jurisdiction of the courts of Estonia</strong>, with <strong>Tallinn, Harju County</strong> as the agreed legal venue.</p>
       <p>You hereby irrevocably consent to the personal and exclusive jurisdiction of such courts and waive any objections based on venue or forum non conveniens.</p>
 
       <h2 id="contact">10. Contact</h2>
       <p><strong>Business Name:</strong> WuKong OÜ</p>
       <p><strong>Address:</strong> Harju maakond, Tallinn, Kesklinna linnaosa, Ahtri tn 12, 15551, Estonia</p>
-      <p><strong>E-mail:</strong> <a href="mailto:support@wristo.io">support@wristo.io</a></p>
+      <p><strong>E-mail:</strong> <a href="mailto:support@eu261claim.com">support@eu261claim.com</a></p>
     </div>
   </div>
 </template>

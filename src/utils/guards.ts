@@ -9,7 +9,7 @@ interface RouteMeta {
 export function setupPageTitle(route: RouteLocationNormalized) {
   // Set page title from route meta or use default
   const meta = route.meta as RouteMeta;
-  const title = meta.title || 'Wristo Store';
+  const title = meta.title || 'EU261 Claim';
   document.title = title;
   
   // Update meta description if provided

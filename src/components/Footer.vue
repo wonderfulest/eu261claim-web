@@ -34,7 +34,7 @@
             <span>Terms</span>
           </a>
           
-          <a href="mailto:support@wristo.io" class="footer-action">
+          <a href="mailto:support@eu261claim.com" class="footer-action">
             <div class="action-icon">✉️</div>
             <span>Support</span>
           </a>
@@ -59,7 +59,7 @@
         </div>
         <div class="footer-detail-block">
           <strong>Email:</strong>
-          <a href="mailto:support@wristo.io">support@wristo.io</a>
+          <a href="mailto:support@eu261claim.com">support@eu261claim.com</a>
         </div>
         <div class="footer-detail-block">
           <strong>Privacy Policy:</strong>
@@ -67,7 +67,7 @@
         </div>
         <!-- <div class="footer-detail-block">
           <strong>Contact us on SLACK:</strong>
-          <a href="https://join.slack.com/t/wristo/shared_invite/zt-37oujfc82-w6vpl_hzGNYYmsmN5vNOzg" target="_blank">Join Slack Channel</a>
+          <a href="https://join.slack.com/t/eu261claim/shared_invite/zt-37oujfc82-w6vpl_hzGNYYmsmN5vNOzg" target="_blank">Join Slack Channel</a>
         </div> -->
         <div class="footer-detail-links">
           <a href="/terms-and-conditions">Terms of Use</a> |
@@ -175,9 +175,12 @@ onUnmounted(() => {
 
 <style scoped>
 .footer {
-  color: #4b5563;
+  color: var(--text-secondary, #9aa0a6);
   font-size: 0.9rem;
-  background: #f9fafb;
+  background: rgba(20, 20, 26, 0.72);
+  border-top: 1px solid var(--border-default, #262630);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   padding: 18px 0;
   text-align: center;
   cursor: pointer;
@@ -189,7 +192,6 @@ onUnmounted(() => {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  border-top: 1px solid #e5e7eb;
 }
 
 /* */
@@ -203,10 +205,10 @@ onUnmounted(() => {
     transform: translateY(100%);
     transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     backdrop-filter: blur(20px);
-    background: linear-gradient(135deg, rgba(249, 250, 251, 0.98), rgba(243, 244, 246, 0.98));
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, rgba(20, 20, 26, 0.94), rgba(14, 14, 17, 0.94));
+    border-top: 1px solid var(--border-default, #262630);
     border-radius: 20px 20px 0 0;
-    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.35);
     padding: 0;
     min-height: auto;
   }
@@ -217,7 +219,7 @@ onUnmounted(() => {
   
   .footer.expanded {
     transform: translateY(0);
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(248, 250, 252, 0.98));
+    background: linear-gradient(135deg, rgba(28, 28, 36, 0.96), rgba(20, 20, 26, 0.96));
     backdrop-filter: blur(25px);
   }
   
@@ -232,55 +234,13 @@ onUnmounted(() => {
     flex-direction: column;
     align-items: center;
     padding: 12px 0 8px 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  }
-  
-  .drag-indicator {
-    width: 36px;
-    height: 4px;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 2px;
-    margin-bottom: 8px;
-  }
-  
-  .footer-title {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: #374151;
-    letter-spacing: 0.5px;
-  }
-  
-  .mobile-footer-content {
-    padding: 16px 20px 20px 20px;
-  }
-  
-  .footer-actions {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-    margin-bottom: 16px;
-  }
-  
-  .footer-action {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-decoration: none;
-    color: #374151;
-    padding: 12px 8px;
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.7);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    transition: all 0.2s ease;
-    cursor: pointer;
-    border: none;
-    font-family: inherit;
+    border-bottom: 1px solid var(--border-default, #262630);
   }
   
   .footer-action:hover,
   .footer-action:active {
-    background: rgba(59, 130, 246, 0.1);
-    border-color: rgba(59, 130, 246, 0.2);
+    background: rgba(59, 130, 246, 0.14);
+    border-color: rgba(96, 165, 250, 0.35);
     transform: translateY(-1px);
   }
   
@@ -293,19 +253,19 @@ onUnmounted(() => {
   .footer-action span {
     font-size: 0.75rem;
     font-weight: 500;
-    color: #6B7280;
+    color: var(--text-secondary, #9aa0a6);
   }
   
   .footer-action:hover span {
-    color: #3B82F6;
+    color: var(--color-cta-hover, #60a5fa);
   }
   
   .footer-copyright {
     text-align: center;
     font-size: 0.8rem;
-    color: #9CA3AF;
+    color: var(--text-secondary, #9aa0a6);
     padding-top: 12px;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-top: 1px solid var(--border-default, #262630);
   }
   
   /* */
@@ -330,45 +290,45 @@ onUnmounted(() => {
 }
 
 .footer-main {
-  color: #6b7280;
+  color: var(--text-secondary, #9aa0a6);
   font-size: 0.9rem;
   letter-spacing: 0.5px;
 }
 
 .footer a {
-  color: #2563eb;
+  color: var(--color-cta, #3b82f6);
   text-decoration: none;
   margin: 0 4px;
   transition: color 0.2s;
 }
 
 .footer a:hover {
-  color: #1d4ed8;
+  color: var(--color-cta-hover, #60a5fa);
 }
 
 .footer-detail {
   margin-top: 0;
-  color: #4b5563;
+  color: var(--text-secondary, #9aa0a6);
   font-size: 0.9rem;
   line-height: 1.7;
   animation: fadeIn 0.3s;
   padding: 16px 0 4px;
-  background: #f3f4f6;
+  background: rgba(20, 20, 26, 0.82);
   width: 100%;
 }
 
 .footer-detail-title {
   font-weight: bold;
   margin-bottom: 8px;
-  color: #111827;
+  color: var(--text-primary, #e6e6e6);
 }
 .footer-detail-links {
   margin-top: 18px;
-  color: #2563eb;
+  color: var(--color-cta, #3b82f6);
   font-size: 0.9rem;
 }
 .footer-detail-links a {
-  color: #2563eb;
+  color: var(--color-cta, #3b82f6);
   margin: 0 4px;
 }
 .footer-expand-enter-active,

@@ -16,7 +16,7 @@
               <h3>Email Support</h3>
             </div>
             <p>Get in touch with our support team for technical assistance and general inquiries.</p>
-            <a href="mailto:support@wristo.io" class="info-link">support@wristo.io</a>
+            <a href="mailto:support@eu261claim.com" class="info-link">support@eu261claim.com</a>
           </div>
           
           <div class="info-card">

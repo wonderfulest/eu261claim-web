@@ -9,7 +9,7 @@
         <div class="method-icon">📧</div>
         <div class="method-content">
           <span class="method-label">Email</span>
-          <a href="mailto:support@wristo.io" class="method-link">support@wristo.io</a>
+          <a href="mailto:support@eu261claim.com" class="method-link">support@eu261claim.com</a>
         </div>
       </div>
       <div class="contact-method">

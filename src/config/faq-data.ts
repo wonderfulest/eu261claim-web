@@ -73,7 +73,7 @@ export const questionsByCategory: QuestionsByCategory = {
     {
       q: "How do I input the Code to unlock the trial?",
       a:
-        'Open the link <a href="https://wristo.io/code"><strong><u>https://wristo.io/code</u></strong></a>, enter the six-digit number on the watch face, complete the payment as guided, ' +
+        'Open the link <a href="https://www.eu261claim.com/code"><strong><u>https://www.eu261claim.com/code</u></strong></a>, enter the six-digit number on the watch face, complete the payment as guided, ' +
         "and the watch face will automatically refresh to a usable state. The refresh time is generally within five minutes (pay attention to the progress bar at the edge of the watch face)." +
         " If the watch face does not appear for a long time, try synchronizing with the Connect APP or switching networks.",
     },
@@ -86,29 +86,29 @@ export const questionsByCategory: QuestionsByCategory = {
     {
       q: "Is this a one-time or recurring payment?",
       a:
-        "All the apps and clockfaces sold with Wristo are one time payments for a lifetime license. " +
-        "However, if you remove and reinstall an app or clockface, it might ask for payment again. You can unlock it again for free by going to <a href=\"https://wristo.io/unlock\" target=\"_blank\" rel=\"noopener noreferrer\"><strong><u>https://wristo.io/unlock</u></strong></a>.",
+        "All the apps and clockfaces sold with EU261 Claim are one time payments for a lifetime license. " +
+        "However, if you remove and reinstall an app or clockface, it might ask for payment again. You can unlock it again for free by going to <a href=\"https://www.eu261claim.com/unlock\" target=\"_blank\" rel=\"noopener noreferrer\"><strong><u>https://www.eu261claim.com/unlock</u></strong></a>.",
     },
     {
       q: "How can I request a refund?",
       a:
-        'We offer a 14-day no-questions-asked refund period from the date of purchase for all digital products. To request a refund, contact us at <a href="mailto:support@wristo.io"><strong><u>support@wristo.io</u></strong></a> within fourteen (14) calendar days of the original purchase date, including valid proof of purchase.',
+        'We offer a 14-day no-questions-asked refund period from the date of purchase for all digital products. To request a refund, contact us at <a href="mailto:support@eu261claim.com"><strong><u>support@eu261claim.com</u></strong></a> within fourteen (14) calendar days of the original purchase date, including valid proof of purchase.',
     },
     {
       q: "How can I find my purchase history?",
       a:
-        "You can look up your complete purchase history at <a href=\"https://wristo.io/purchases-history\" target=\"_blank\" rel=\"noopener noreferrer\"><strong><u>https://wristo.io/purchases-history</u></strong></a>. " +
+        "You can look up your complete purchase history at <a href=\"https://www.eu261claim.com/purchases-history\" target=\"_blank\" rel=\"noopener noreferrer\"><strong><u>https://www.eu261claim.com/purchases-history</u></strong></a>. " +
         "If you have a registered account, you can also view your purchase history directly by clicking on your profile in the top right corner and selecting 'Purchases'.",
     },
     {
       q: "I already paid! Why am I charged a second time?",
       a:
-        "If you remove and reinstall an app or clockface, our system may not always recognize you and may ask you to pay again. You can unlock your clockface again for free at <a href=\"https://wristo.io/unlock\" target=\"_blank\" rel=\"noopener noreferrer\"><strong><u>https://wristo.io/unlock</u></strong></a> using the code shown on your watch and the email you used for the original purchase.",
+        "If you remove and reinstall an app or clockface, our system may not always recognize you and may ask you to pay again. You can unlock your clockface again for free at <a href=\"https://www.eu261claim.com/unlock\" target=\"_blank\" rel=\"noopener noreferrer\"><strong><u>https://www.eu261claim.com/unlock</u></strong></a> using the code shown on your watch and the email you used for the original purchase.",
     },
     {
       q: "How do I contact support?",
       a:
-        "If you have any questions or need further assistance, please contact us at <a href=\"mailto:support@wristo.io\"><strong><u>support@wristo.io</u></strong></a>.",
+        "If you have any questions or need further assistance, please contact us at <a href=\"mailto:support@eu261claim.com\"><strong><u>support@eu261claim.com</u></strong></a>.",
     },
   ],
   "Time & Date Settings": [
@@ -196,7 +196,7 @@ export const questionsByCategory: QuestionsByCategory = {
         "1. Connect your Garmin device to a computer.<br>" +
         "2. Navigate to the directory <code>/Garmin/Apps/Logs/</code>.<br>" +
         "3. Locate the log file <code>CIQ_LOG.bak</code>.<br>" +
-        "4. Send the log file to <a href=\"mailto:support@wristo.io\"><strong><u>support@wristo.io</u></strong></a>, along with a brief description of the issue."
+        "4. Send the log file to <a href=\"mailto:support@eu261claim.com\"><strong><u>support@eu261claim.com</u></strong></a>, along with a brief description of the issue."
     },
     {
       q: "How long will it take to get a response after sending the log file?",
