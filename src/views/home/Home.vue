@@ -5,71 +5,21 @@
       <p class="page-subtitle">These flights qualify for EU261 compensation.</p>
     </header>
 
-    <section class="table-section">
-      <div v-if="eligibleFlights.length > 0" class="table-scroll">
-        <table class="flight-table">
-          <thead>
-            <tr>
-              <th class="col-flight">Flight</th>
-              <th class="col-date">Date</th>
-              <th class="col-time">STD</th>
-              <th class="col-time">STA</th>
-              <th class="col-actual">Actual</th>
-              <th class="col-status">Status</th>
-              <th class="col-action">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr
-              v-for="flight in eligibleFlights"
-              :key="flight.flightId"
-              class="flight-row"
-              @click="handleRowClick(flight)"
-            >
-              <td class="col-flight">
-                <span class="flight-no">{{ flight.flightNo }}</span>
-              </td>
-              <td class="col-date">
-                <span class="text-secondary">{{ flight.flightDate }}</span>
-              </td>
-              <td class="col-time">
-                <span class="time-mono">{{ flight.std }}</span>
-              </td>
-              <td class="col-time">
-                <span class="time-mono">{{ flight.sta }}</span>
-              </td>
-              <td class="col-actual">
-                <span class="text-primary">{{ formatActual(flight) }}</span>
-              </td>
-              <td class="col-status">
-                <div class="status-wrap">
-                  <span class="status-alert">{{ flight.status }}</span>
-                  <span class="status-dot">·</span>
-                  <span class="status-eligible">Eligible</span>
-                </div>
-              </td>
-              <td class="col-action" @click.stop>
-                <button class="cta" type="button" @click="handleClaim(flight)">
-                  Claim compensation →
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+    <FlightSearchCard
+      v-model:flightNo="searchFlightNo"
+      v-model:flightDate="searchDate"
+      :loading="isLoading"
+      :errorMessage="errorMessage"
+      :hasNoResult="!!(apiFlights && apiFlights.length === 0)"
+      @search="searchFlights"
+    />
 
-      <div v-else class="empty-state">
-        <div class="empty-icon" aria-hidden="true">✈︎</div>
-        <h2 class="empty-title">No eligible flights found</h2>
-        <p class="empty-desc">
-          We couldn’t find any flights matching your search that qualify for EU261 compensation. Only flights qualifying for EU261 compensation are shown.
-        </p>
-        <div class="empty-actions">
-          <button class="btn-primary" type="button" @click="handleSearchAnother">Search another flight</button>
-          <button class="btn-secondary" type="button" @click="handleManualCheck">Request manual check</button>
-        </div>
-      </div>
-    </section>
+    <FlightResultsTable
+      :flights="flights"
+      @claim="handleClaim"
+      @searchAnother="handleSearchAnother"
+      @manualCheck="handleManualCheck"
+    />
 
     <footer class="page-footer">
       <p class="disclaimer">
@@ -80,8 +30,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import FlightSearchCard from './components/FlightSearchCard.vue'
+import FlightResultsTable from './components/FlightResultsTable.vue'
 
 type FlightStatus = 'CANCELLED' | 'DELAYED'
 
@@ -94,47 +46,23 @@ interface EligibleFlight {
   sta: string
   actualTime: string
   status: FlightStatus
+  delayMinutes?: number
   eligible: boolean
 }
 
 const router = useRouter()
 const route = useRoute()
 
-const defaultFlights: EligibleFlight[] = [
-  {
-    flightId: 'flt_1',
-    bookingRef: 'ABC123',
-    flightNo: 'FR1234',
-    flightDate: '2025-01-18',
-    std: '08:30',
-    sta: '10:40',
-    actualTime: '07:55',
-    status: 'CANCELLED',
-    eligible: true
-  },
-  {
-    flightId: 'flt_2',
-    bookingRef: 'DEF456',
-    flightNo: 'LH789',
-    flightDate: '2025-01-18',
-    std: '11:20',
-    sta: '13:35',
-    actualTime: '14:12',
-    status: 'DELAYED',
-    eligible: true
-  },
-  {
-    flightId: 'flt_3',
-    bookingRef: 'GHI789',
-    flightNo: 'AF5678',
-    flightDate: '2025-01-18',
-    std: '15:10',
-    sta: '17:25',
-    actualTime: '17:10',
-    status: 'DELAYED',
-    eligible: false
-  }
-]
+const searchFlightNo = ref('')
+const searchDate = ref('')
+const isLoading = ref(false)
+const errorMessage = ref('')
+const apiFlights = ref<EligibleFlight[] | null>(null)
+
+const historyPage = ref(1)
+const historyTotalPages = ref<number | null>(null)
+const isHistoryMode = ref(true)
+let historyTimer: number | null = null
 
 const parseFlightsFromQuery = (): EligibleFlight[] | null => {
   const raw = route.query.flights
@@ -153,6 +81,8 @@ const parseFlightsFromQuery = (): EligibleFlight[] | null => {
 }
 
 const flights = computed<EligibleFlight[]>(() => {
+  if (apiFlights.value) return apiFlights.value
+
   const fromQuery = parseFlightsFromQuery()
   if (fromQuery) return fromQuery
 
@@ -160,16 +90,40 @@ const flights = computed<EligibleFlight[]>(() => {
   if (Array.isArray(stateFlights)) return stateFlights as EligibleFlight[]
 
   if (route.query.empty === '1') return []
-  return defaultFlights
+  return []
 })
 
-const eligibleFlights = computed(() => flights.value.filter((f) => f.eligible))
+const formatTimeFromBackend = (value: string | null | undefined): string => {
+  if (!value) return ''
+  const str = String(value)
+  const parts = str.includes('T') ? str.split('T') : str.split(' ')
+  const timePart = parts[1] || parts[0]
+  return timePart.slice(0, 5)
+}
 
-const formatActual = (flight: EligibleFlight) => {
-  if (flight.status === 'CANCELLED') {
-    return `Cancelled ${flight.actualTime}`
+const mapBackendFlight = (raw: any, index: number): EligibleFlight => {
+  const flightNumber = raw.flightNumber || raw.flight_no || raw.flightIata || 'UNKNOWN'
+  const flightDate = raw.flightDate || raw.flight_date || ''
+  const std = formatTimeFromBackend(raw.std)
+  const sta = formatTimeFromBackend(raw.sta)
+  const actual = formatTimeFromBackend(raw.actualTime)
+
+  const rawStatus = String(raw.status || '').toUpperCase()
+  const status: FlightStatus = rawStatus === 'CANCELLED' ? 'CANCELLED' : 'DELAYED'
+
+  return {
+    flightId: raw.id || `${flightNumber}-${flightDate}-${index}`,
+    bookingRef: '',
+    flightNo: flightNumber,
+    flightDate,
+    std,
+    sta,
+    actualTime: actual,
+    status,
+    delayMinutes: typeof raw.arrivalDelayMinutes === 'number' ? raw.arrivalDelayMinutes : undefined,
+    // 由后端控制结果集是否为 EU261 eligible，这里全部标记为 true，让前端只负责展示
+    eligible: true
   }
-  return `Landed ${flight.actualTime}`
 }
 
 const handleClaim = (flight: EligibleFlight) => {
@@ -182,10 +136,6 @@ const handleClaim = (flight: EligibleFlight) => {
   })
 }
 
-const handleRowClick = (flight: EligibleFlight) => {
-  handleClaim(flight)
-}
-
 const handleSearchAnother = () => {
   router.replace({
     path: '/',
@@ -196,6 +146,120 @@ const handleSearchAnother = () => {
 const handleManualCheck = () => {
   router.push({ name: 'Contact' })
 }
+
+const searchFlights = async () => {
+  // 用户主动搜索后，停止历史轮播模式
+  isHistoryMode.value = false
+  errorMessage.value = ''
+  apiFlights.value = null
+
+  const trimmedNo = searchFlightNo.value.trim()
+  if (!trimmedNo) {
+    errorMessage.value = 'Please enter a flight number (e.g. FR1234)'
+    return
+  }
+
+  const params = new URLSearchParams()
+  params.set('flight_iata', trimmedNo)
+  const trimmedDate = searchDate.value.trim()
+  if (trimmedDate) {
+    // 简单日期合法性校验：YYYY-MM-DD 且为真实日期
+    const dateRegex = /^\d{4}-\d{2}-\d{2}$/
+    if (!dateRegex.test(trimmedDate)) {
+      errorMessage.value = 'Please enter a valid date in YYYY-MM-DD format.'
+      return
+    }
+    const [y, m, d] = trimmedDate.split('-').map((v) => Number(v))
+    const jsDate = new Date(y, m - 1, d)
+    if (
+      Number.isNaN(jsDate.getTime()) ||
+      jsDate.getFullYear() !== y ||
+      jsDate.getMonth() !== m - 1 ||
+      jsDate.getDate() !== d
+    ) {
+      errorMessage.value = 'Please enter a real calendar date.'
+      return
+    }
+    params.set('flight_date', trimmedDate)
+  }
+
+  isLoading.value = true
+  try {
+    const resp = await fetch(`/api/public/flights/query/by-number?${params.toString()}`)
+    if (!resp.ok) {
+      throw new Error(`Request failed with status ${resp.status}`)
+    }
+    const respJson: any = await resp.json()
+    const payload = respJson?.data ?? respJson
+    const list: any[] = Array.isArray(payload)
+      ? payload
+      : Array.isArray(payload?.list)
+        ? payload.list
+        : []
+    apiFlights.value = list.map((item: any, idx: number) => mapBackendFlight(item, idx))
+  } catch (e: any) {
+    console.error('searchFlights error', e)
+    errorMessage.value = e?.message || 'Failed to search flights. Please try again.'
+  } finally {
+    isLoading.value = false
+  }
+}
+
+const loadHistoryPage = async (pageNum: number) => {
+  try {
+    const params = new URLSearchParams()
+    params.set('pageNum', String(pageNum))
+    params.set('pageSize', '10')
+
+    const resp = await fetch(`/api/public/flights/history?${params.toString()}`)
+    if (!resp.ok) {
+      throw new Error(`History request failed with status ${resp.status}`)
+    }
+    const respJson: any = await resp.json()
+    const payload = respJson?.data ?? respJson
+    const list = Array.isArray(payload?.list) ? payload.list : []
+
+    historyPage.value = payload?.pageNum || pageNum
+    historyTotalPages.value = payload?.pages || null
+    apiFlights.value = list.map((item: any, idx: number) => mapBackendFlight(item, idx))
+  } catch (e) {
+    console.error('loadHistoryPage error', e)
+  }
+}
+
+// 当用户清空搜索条件时，恢复到历史模式并重新加载默认历史列表
+watch([searchFlightNo, searchDate], async ([flightNo, flightDate]) => {
+  if (!flightNo.trim() && !flightDate.trim()) {
+    isHistoryMode.value = true
+    errorMessage.value = ''
+    apiFlights.value = null
+    await loadHistoryPage(1)
+  }
+})
+
+onMounted(async () => {
+  // 初始加载历史记录第 1 页
+  await loadHistoryPage(1)
+
+  // 每 5 秒轮播一页，仅在历史模式下生效
+  historyTimer = window.setInterval(async () => {
+    if (!isHistoryMode.value) return
+
+    const total = historyTotalPages.value
+    if (!total || total <= 1) return
+
+    const current = historyPage.value || 1
+    const next = current >= total ? 1 : current + 1
+    await loadHistoryPage(next)
+  }, 3000)
+})
+
+onBeforeUnmount(() => {
+  if (historyTimer !== null) {
+    clearInterval(historyTimer)
+    historyTimer = null
+  }
+})
 </script>
 
 <style scoped>
@@ -224,213 +288,6 @@ const handleManualCheck = () => {
   margin: 6px 0 0;
   font-size: 13px;
   color: var(--text-secondary);
-}
-
-.table-section {
-  max-width: 1120px;
-  margin: 0 auto;
-}
-
-.table-scroll {
-  overflow-x: auto;
-  border: 1px solid var(--border-default);
-  border-radius: 14px;
-  background: var(--bg-table);
-}
-
-.flight-table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 880px;
-}
-
-.flight-table th,
-.flight-table td {
-  padding: 12px 14px;
-  border-bottom: 1px solid var(--border-default);
-  text-align: left;
-  white-space: nowrap;
-  font-size: 13px;
-}
-
-.flight-table th {
-  font-size: 12px;
-  color: var(--text-secondary);
-  font-weight: 600;
-  letter-spacing: 0.04em;
-}
-
-.flight-row {
-  cursor: pointer;
-  transition: background-color 0.15s ease;
-}
-
-.flight-row:hover {
-  background: var(--bg-row-hover);
-}
-
-.col-flight {
-  width: 128px;
-}
-
-.col-date {
-  width: 128px;
-}
-
-.col-time {
-  width: 92px;
-}
-
-.col-actual {
-  width: 160px;
-}
-
-.col-status {
-  width: 170px;
-}
-
-.col-action {
-  width: 190px;
-}
-
-.flight-no {
-  display: inline-block;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
-  font-weight: 600;
-}
-
-.time-mono {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
-}
-
-.text-secondary {
-  color: var(--text-secondary);
-}
-
-.text-primary {
-  color: var(--text-primary);
-}
-
-.status-wrap {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 6px;
-}
-
-.status-alert {
-  color: var(--color-alert);
-  font-weight: 700;
-  letter-spacing: 0.04em;
-}
-
-.status-dot {
-  color: var(--text-secondary);
-}
-
-.status-eligible {
-  color: var(--color-eligible);
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px 12px;
-  border-radius: 10px;
-  border: 1px solid rgba(59, 130, 246, 0.28);
-  background: rgba(59, 130, 246, 0.12);
-  color: var(--color-cta);
-  font-weight: 700;
-  font-size: 13px;
-  cursor: pointer;
-  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
-}
-
-.flight-row:hover .cta {
-  background: rgba(59, 130, 246, 0.18);
-  border-color: rgba(96, 165, 250, 0.45);
-  color: var(--color-cta-hover);
-}
-
-.cta:hover {
-  background: rgba(59, 130, 246, 0.22);
-  border-color: rgba(96, 165, 250, 0.6);
-  color: var(--color-cta-hover);
-}
-
-.empty-state {
-  border: 1px solid var(--border-default);
-  border-radius: 18px;
-  background: rgba(20, 20, 26, 0.72);
-  padding: 42px 18px;
-  text-align: center;
-}
-
-.empty-icon {
-  width: 64px;
-  height: 64px;
-  border-radius: 999px;
-  margin: 0 auto 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(38, 38, 48, 0.9);
-  background: rgba(14, 14, 17, 0.6);
-  color: var(--text-secondary);
-  font-size: 22px;
-}
-
-.empty-title {
-  margin: 0;
-  font-size: 20px;
-  font-weight: 700;
-}
-
-.empty-desc {
-  margin: 10px auto 0;
-  max-width: 640px;
-  font-size: 13px;
-  line-height: 1.6;
-  color: var(--text-secondary);
-}
-
-.empty-actions {
-  margin-top: 18px;
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.btn-primary,
-.btn-secondary {
-  padding: 10px 14px;
-  border-radius: 10px;
-  font-size: 13px;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.btn-primary {
-  border: 1px solid rgba(59, 130, 246, 0.45);
-  background: rgba(59, 130, 246, 0.18);
-  color: var(--text-primary);
-}
-
-.btn-primary:hover {
-  background: rgba(59, 130, 246, 0.25);
-}
-
-.btn-secondary {
-  border: 1px solid var(--border-default);
-  background: rgba(20, 20, 26, 0.55);
-  color: var(--text-primary);
-}
-
-.btn-secondary:hover {
-  background: rgba(28, 28, 36, 0.75);
 }
 
 .page-footer {
