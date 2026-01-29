@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "https://www.eu261claim.com/api/$1"
+      "destination": "https://api.eu261claim.com/api/$1"
     },
     {
       "source": "/(.*)",
