@@ -141,11 +141,11 @@ const goAffiliate = () => {
   border-bottom: 1px solid var(--border-default);
   text-align: left;
   white-space: nowrap;
-  font-size: 13px;
+  font-size: var(--font-size-sm);
 }
 
 .flight-table th {
-  font-size: 12px;
+  font-size: var(--font-size-sm);
   color: var(--text-secondary);
   font-weight: 600;
   letter-spacing: 0.04em;
@@ -220,7 +220,7 @@ const goAffiliate = () => {
 
 .status-eligible {
   color: var(--color-eligible);
-  font-size: 12px;
+  font-size: var(--font-size-sm);
   font-weight: 700;
 }
 
@@ -230,31 +230,31 @@ const goAffiliate = () => {
   justify-content: center;
   padding: 8px 12px;
   border-radius: 10px;
-  border: 1px solid rgba(59, 130, 246, 0.28);
-  background: rgba(59, 130, 246, 0.12);
+  border: 1px solid color-mix(in srgb, var(--color-cta) 28%, transparent);
+  background: color-mix(in srgb, var(--color-cta) 12%, var(--bg-surface));
   color: var(--color-cta);
   font-weight: 700;
-  font-size: 13px;
+  font-size: var(--font-size-sm);
   cursor: pointer;
   transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
 
 .flight-row:hover .cta {
-  background: rgba(59, 130, 246, 0.18);
-  border-color: rgba(96, 165, 250, 0.45);
+  background: color-mix(in srgb, var(--color-cta) 18%, var(--bg-surface));
+  border-color: color-mix(in srgb, var(--color-cta-hover) 45%, transparent);
   color: var(--color-cta-hover);
 }
 
 .cta:hover {
-  background: rgba(59, 130, 246, 0.22);
-  border-color: rgba(96, 165, 250, 0.6);
+  background: color-mix(in srgb, var(--color-cta) 22%, var(--bg-surface));
+  border-color: color-mix(in srgb, var(--color-cta-hover) 60%, transparent);
   color: var(--color-cta-hover);
 }
 
 .empty-state {
   border: 1px solid var(--border-default);
   border-radius: 18px;
-  background: rgba(20, 20, 26, 0.72);
+  background: color-mix(in srgb, var(--bg-page) 72%, transparent);
   padding: 42px 18px;
   text-align: center;
 }
@@ -267,22 +267,22 @@ const goAffiliate = () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(38, 38, 48, 0.9);
-  background: rgba(14, 14, 17, 0.6);
+  border: 1px solid color-mix(in srgb, var(--border-default) 90%, transparent);
+  background: color-mix(in srgb, var(--bg-page) 60%, transparent);
   color: var(--text-secondary);
-  font-size: 22px;
+  font-size: var(--font-size-xl);
 }
 
 .empty-title {
   margin: 0;
-  font-size: 20px;
+  font-size: var(--font-size-xl);
   font-weight: 700;
 }
 
 .empty-desc {
   margin: 10px auto 0;
   max-width: 640px;
-  font-size: 13px;
+  font-size: var(--font-size-sm);
   line-height: 1.6;
   color: var(--text-secondary);
 }
@@ -299,28 +299,28 @@ const goAffiliate = () => {
 .btn-secondary {
   padding: 10px 14px;
   border-radius: 10px;
-  font-size: 13px;
+  font-size: var(--font-size-sm);
   font-weight: 700;
   cursor: pointer;
 }
 
 .btn-primary {
-  border: 1px solid rgba(59, 130, 246, 0.45);
-  background: rgba(59, 130, 246, 0.18);
+  border: 1px solid color-mix(in srgb, var(--color-cta) 45%, transparent);
+  background: color-mix(in srgb, var(--color-cta) 18%, var(--bg-surface));
   color: var(--text-primary);
 }
 
 .btn-primary:hover {
-  background: rgba(59, 130, 246, 0.25);
+  background: color-mix(in srgb, var(--color-cta) 25%, var(--bg-surface));
 }
 
 .btn-secondary {
   border: 1px solid var(--border-default);
-  background: rgba(20, 20, 26, 0.55);
+  background: color-mix(in srgb, var(--bg-page) 55%, transparent);
   color: var(--text-primary);
 }
 
 .btn-secondary:hover {
-  background: rgba(28, 28, 36, 0.75);
+  background: color-mix(in srgb, var(--bg-page) 75%, transparent);
 }
 </style>

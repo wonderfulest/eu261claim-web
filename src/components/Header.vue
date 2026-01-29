@@ -81,11 +81,11 @@ const handleMobileStart = () => {
 <style scoped>
 .header-bar {
   width: 100%;
-  background: rgba(20, 20, 26, 0.82);
+  background: var(--bg-surface);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--border-default, #262630);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  border-bottom: 1px solid var(--border-default);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
   position: sticky;
   top: 0;
   z-index: 30;
@@ -109,7 +109,7 @@ const handleMobileStart = () => {
 }
 
 .brand-logo {
-  height: 28px;
+  height: 42px;
   width: auto;
   display: block;
 }
@@ -121,7 +121,7 @@ const handleMobileStart = () => {
   background: var(--color-cta, #3b82f6);
   color: #ffffff;
   font-weight: 700;
-  font-size: 14px;
+  font-size: var(--font-size-sm);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -129,8 +129,8 @@ const handleMobileStart = () => {
 
 .brand-text {
   font-weight: 700;
-  font-size: 18px;
-  color: var(--text-primary, #e6e6e6);
+  font-size: var(--font-size-xl);
+  color: var(--text-primary);
 }
 
 .nav {
@@ -143,36 +143,36 @@ const handleMobileStart = () => {
   height: 34px;
   padding: 0 12px;
   border-radius: 999px;
-  border: 1px solid var(--border-default, #262630);
-  background: rgba(14, 14, 17, 0.5);
-  color: var(--text-primary, #e6e6e6);
-  font-size: 13px;
+  border: 1px solid var(--border-default);
+  background: color-mix(in srgb, var(--bg-page) 70%, transparent);
+  color: var(--text-primary);
+  font-size: var(--font-size-sm);
   font-weight: 700;
   cursor: pointer;
   transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
 
 .theme-toggle:hover {
-  background: rgba(59, 130, 246, 0.14);
-  border-color: rgba(96, 165, 250, 0.45);
-  color: var(--color-cta-hover, #60a5fa);
+  background: color-mix(in srgb, var(--color-cta) 18%, var(--bg-page));
+  border-color: var(--color-cta-hover);
+  color: var(--color-cta-hover);
 }
 
 .nav-link {
-  font-size: 14px;
-  color: var(--text-secondary, #9aa0a6);
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
   text-decoration: none;
   padding: 4px 0;
 }
 
 .nav-link:hover {
-  color: var(--color-cta-hover, #60a5fa);
+  color: var(--color-cta-hover);
 }
 
 .nav-link.active {
-  color: var(--color-cta, #3b82f6);
+  color: var(--color-cta);
   font-weight: 600;
-  border-bottom: 2px solid var(--color-cta, #3b82f6);
+  border-bottom: 2px solid var(--color-cta);
 }
 
 .nav-cta {
@@ -193,7 +193,7 @@ const handleMobileStart = () => {
 
 .badge-text {
   color: white;
-  font-size: 14px;
+  font-size: var(--font-size-sm);
   font-weight: 600;
   line-height: 1;
   margin-bottom: 2px;
@@ -201,7 +201,7 @@ const handleMobileStart = () => {
 
 .badge-days {
   color: rgba(255, 255, 255, 0.9);
-  font-size: 11px;
+  font-size: var(--font-size-xs);
   font-weight: 500;
   line-height: 1;
 }
@@ -216,11 +216,11 @@ const handleMobileStart = () => {
   height: 36px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid #f0f0f0;
+  border: 2px solid var(--border-default);
   transition: all 0.2s ease;
 }
 .user-avatar-container:hover .user-avatar {
-  border-color: #347cff;
+  border-color: var(--color-cta-hover);
   transform: scale(1.05);
 }
 .premium-badge {
@@ -229,7 +229,7 @@ const handleMobileStart = () => {
   right: -8px;
   background: linear-gradient(135deg, #ffd700, #ffb700);
   color: #000;
-  font-size: 10px;
+  font-size: var(--font-size-xs);
   font-weight: 700;
   padding: 2px 6px;
   border-radius: 8px;
@@ -250,7 +250,7 @@ const handleMobileStart = () => {
   padding: 0 22px;
   height: 36px;
   border-radius: 20px;
-  font-size: 14px;
+  font-size: var(--font-size-sm);
   font-weight: 500;
   letter-spacing: -0.01em;
   cursor: pointer;
@@ -297,36 +297,36 @@ const handleMobileStart = () => {
 
 /* Login button */
 .login-btn {
-  color: #0066CC;
-  border-color: #D0D0D0;
-  background: rgba(255, 255, 255, 0.8);
+  color: var(--color-cta);
+  border-color: var(--border-default);
+  background: color-mix(in srgb, var(--bg-surface) 20%, #ffffff);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
 
 .login-btn:hover {
-  background: rgba(255, 255, 255, 0.9);
-  border-color: #A0A0A0;
+  background: color-mix(in srgb, var(--bg-surface) 35%, #ffffff);
+  border-color: var(--border-default);
 }
 
 /* Signup button */
 .signup-btn {
-  background: #0071E3;
-  color: white;
-  border-color: #0071E3;
+  background: var(--color-cta);
+  color: var(--bg-page);
+  border-color: var(--color-cta);
   font-weight: 500;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .signup-btn:hover {
-  background: #0077ED;
-  border-color: #0077ED;
-  box-shadow: 0 2px 6px rgba(0, 113, 227, 0.3);
+  background: var(--color-cta-hover);
+  border-color: var(--color-cta-hover);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
 }
 
 .signup-btn:active {
-  background: #0062C7;
-  border-color: #0062C7;
+  background: var(--color-cta);
+  border-color: var(--color-cta);
 }
 
 /* Mobile menu button */
@@ -347,7 +347,7 @@ const handleMobileStart = () => {
 .mobile-menu-btn span {
   width: 20px;
   height: 2px;
-  background: var(--text-primary, #e6e6e6);
+  background: var(--text-primary);
   border-radius: 1px;
   transition: all 0.3s ease;
   margin: 2px 0;
@@ -393,7 +393,7 @@ const handleMobileStart = () => {
   border: 1px solid var(--border-default, #262630);
   background: rgba(20, 20, 26, 0.6);
   color: var(--text-primary, #e6e6e6);
-  font-size: 14px;
+  font-size: var(--font-size-sm);
   font-weight: 700;
 }
 
@@ -418,7 +418,7 @@ const handleMobileStart = () => {
   display: block;
   padding: 16px 0;
   color: #333;
-  font-size: 18px;
+  font-size: var(--font-size-xl);
   font-weight: 500;
   text-decoration: none;
   border-bottom: 1px solid #f0f0f0;
@@ -448,7 +448,7 @@ const handleMobileStart = () => {
   background: none;
   border: none;
   color: #333;
-  font-size: 18px;
+  font-size: var(--font-size-xl);
   font-weight: 500;
   text-align: left;
   cursor: pointer;
@@ -494,7 +494,7 @@ const handleMobileStart = () => {
   display: block;
   padding: 12px 24px;
   color: #666;
-  font-size: 16px;
+  font-size: var(--font-size-md);
   text-decoration: none;
   transition: all 0.2s;
 }
@@ -537,7 +537,7 @@ const handleMobileStart = () => {
   right: -4px;
   background: linear-gradient(135deg, #ffd700, #ffb700);
   color: #000;
-  font-size: 10px;
+  font-size: var(--font-size-xs);
   font-weight: 700;
   padding: 2px 6px;
   border-radius: 8px;
@@ -559,7 +559,7 @@ const handleMobileStart = () => {
   border: none;
   border-radius: 12px;
   color: #333;
-  font-size: 16px;
+  font-size: var(--font-size-md);
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s;

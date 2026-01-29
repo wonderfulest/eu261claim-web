@@ -144,7 +144,8 @@ const handleSearchAnother = () => {
 }
 
 const handleManualCheck = () => {
-  router.push({ name: 'Contact' })
+  window.open('https://airhelp.tpo.li/I23Fh9CN', '_blank')
+  // router.push({ name: 'Contact' })
 }
 
 const searchFlights = async () => {
@@ -264,7 +265,6 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .eu261-page {
-  min-height: calc(100vh - 60px);
   background: radial-gradient(1100px 500px at 50% -120px, rgba(59, 130, 246, 0.25) 0%, rgba(14, 14, 17, 0) 60%),
     radial-gradient(900px 420px at 50% 10%, rgba(229, 72, 77, 0.12) 0%, rgba(14, 14, 17, 0) 65%),
     var(--bg-page);
@@ -279,14 +279,14 @@ onBeforeUnmount(() => {
 
 .page-title {
   margin: 0;
-  font-size: 24px;
+  font-size: var(--font-size-2xl);
   font-weight: 700;
   letter-spacing: 0.2px;
 }
 
 .page-subtitle {
   margin: 6px 0 0;
-  font-size: 13px;
+  font-size: var(--font-size-sm);
   color: var(--text-secondary);
 }
 
@@ -298,7 +298,7 @@ onBeforeUnmount(() => {
 
 .disclaimer {
   margin: 0;
-  font-size: 12px;
+  font-size: var(--font-size-sm);
   line-height: 1.6;
   color: var(--text-secondary);
 }
@@ -309,7 +309,7 @@ onBeforeUnmount(() => {
   }
 
   .page-title {
-    font-size: 22px;
+    font-size: var(--font-size-xl);
   }
 
   .empty-state {

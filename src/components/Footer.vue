@@ -116,24 +116,36 @@ function handleScroll() {
 
 // 
 function updateFooterVisibility() {
-  const currentScrollY = window.scrollY
   const windowHeight = window.innerHeight
   const documentHeight = document.documentElement.scrollHeight
-  
-  // 
+
+  // 如果页面整体高度不超过一屏，Footer 永远可见
+  if (documentHeight <= windowHeight + 4) {
+    isVisible.value = true
+    ticking = false
+    return
+  }
+
+  const currentScrollY = window.scrollY
+
+  // 在页面顶部时，始终显示 Footer
+  if (currentScrollY === 0) {
+    isVisible.value = true
+    ticking = false
+    return
+  }
+
   const distanceFromBottom = documentHeight - (currentScrollY + windowHeight)
-  
-  // 
+
   if (distanceFromBottom <= 100) {
     isVisible.value = true
   } else {
     isVisible.value = false
-    // 
     if (isExpanded.value) {
       isExpanded.value = false
     }
   }
-  
+
   ticking = false
 }
 
@@ -156,7 +168,7 @@ function collapse() {
 onMounted(() => {
   checkMobile()
   if (isMobile.value) {
-    // 
+    // 移动端初始状态由可见性计算逻辑决定
     isVisible.value = false
     window.addEventListener('scroll', handleScroll, { passive: true })
     window.addEventListener('resize', handleResize)
@@ -175,10 +187,10 @@ onUnmounted(() => {
 
 <style scoped>
 .footer {
-  color: var(--text-secondary, #9aa0a6);
-  font-size: 0.9rem;
-  background: rgba(20, 20, 26, 0.72);
-  border-top: 1px solid var(--border-default, #262630);
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border-default);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   padding: 18px 0;
@@ -205,8 +217,8 @@ onUnmounted(() => {
     transform: translateY(100%);
     transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     backdrop-filter: blur(20px);
-    background: linear-gradient(135deg, rgba(20, 20, 26, 0.94), rgba(14, 14, 17, 0.94));
-    border-top: 1px solid var(--border-default, #262630);
+    background: color-mix(in srgb, var(--bg-page) 94%, transparent);
+    border-top: 1px solid var(--border-default);
     border-radius: 20px 20px 0 0;
     box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.35);
     padding: 0;
@@ -219,7 +231,7 @@ onUnmounted(() => {
   
   .footer.expanded {
     transform: translateY(0);
-    background: linear-gradient(135deg, rgba(28, 28, 36, 0.96), rgba(20, 20, 26, 0.96));
+    background: color-mix(in srgb, var(--bg-surface) 96%, transparent);
     backdrop-filter: blur(25px);
   }
   
@@ -234,13 +246,13 @@ onUnmounted(() => {
     flex-direction: column;
     align-items: center;
     padding: 12px 0 8px 0;
-    border-bottom: 1px solid var(--border-default, #262630);
+    border-bottom: 1px solid var(--border-default);
   }
   
   .footer-action:hover,
   .footer-action:active {
-    background: rgba(59, 130, 246, 0.14);
-    border-color: rgba(96, 165, 250, 0.35);
+    background: color-mix(in srgb, var(--color-cta) 14%, var(--bg-surface));
+    border-color: var(--color-cta-hover);
     transform: translateY(-1px);
   }
   
@@ -251,19 +263,18 @@ onUnmounted(() => {
   }
   
   .footer-action span {
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: var(--text-secondary, #9aa0a6);
+    font-size: var(--font-size-xs);
+    color: var(--text-secondary);
   }
-  
+
   .footer-action:hover span {
-    color: var(--color-cta-hover, #60a5fa);
+    color: var(--color-cta-hover);
   }
   
   .footer-copyright {
     text-align: center;
-    font-size: 0.8rem;
-    color: var(--text-secondary, #9aa0a6);
+    font-size: var(--font-size-xs);
+    color: var(--text-secondary);
     padding-top: 12px;
     border-top: 1px solid var(--border-default, #262630);
   }
@@ -290,45 +301,45 @@ onUnmounted(() => {
 }
 
 .footer-main {
-  color: var(--text-secondary, #9aa0a6);
-  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
   letter-spacing: 0.5px;
 }
 
 .footer a {
-  color: var(--color-cta, #3b82f6);
+  color: var(--color-cta);
   text-decoration: none;
   margin: 0 4px;
   transition: color 0.2s;
 }
 
 .footer a:hover {
-  color: var(--color-cta-hover, #60a5fa);
+  color: var(--color-cta-hover);
 }
 
 .footer-detail {
   margin-top: 0;
-  color: var(--text-secondary, #9aa0a6);
-  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
   line-height: 1.7;
   animation: fadeIn 0.3s;
   padding: 16px 0 4px;
-  background: rgba(20, 20, 26, 0.82);
+  background: var(--bg-surface);
   width: 100%;
 }
 
 .footer-detail-title {
   font-weight: bold;
   margin-bottom: 8px;
-  color: var(--text-primary, #e6e6e6);
+  color: var(--text-primary);
 }
 .footer-detail-links {
   margin-top: 18px;
-  color: var(--color-cta, #3b82f6);
-  font-size: 0.9rem;
+  color: var(--color-cta);
+  font-size: var(--font-size-sm);
 }
 .footer-detail-links a {
-  color: var(--color-cta, #3b82f6);
+  color: var(--color-cta);
   margin: 0 4px;
 }
 .footer-expand-enter-active,

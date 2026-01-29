@@ -105,12 +105,12 @@ const onFlightDateInput = (event: Event) => {
 }
 
 .search-title {
-  font-size: 16px;
+  font-size: var(--font-size-md);
   font-weight: 650;
 }
 
 .search-hint {
-  font-size: 12px;
+  font-size: var(--font-size-sm);
   color: var(--text-secondary);
   max-width: 360px;
   text-align: right;
@@ -131,7 +131,7 @@ const onFlightDateInput = (event: Event) => {
   border: 1px solid var(--border-default);
   background: var(--bg-page);
   color: var(--text-primary);
-  font-size: 13px;
+  font-size: var(--font-size-sm);
 }
 
 .search-input::placeholder {
@@ -145,7 +145,7 @@ const onFlightDateInput = (event: Event) => {
   border: none;
   background: var(--color-cta);
   color: #0b1120;
-  font-size: 14px;
+  font-size: var(--font-size-sm);
   font-weight: 650;
   cursor: pointer;
   white-space: nowrap;
@@ -157,7 +157,7 @@ const onFlightDateInput = (event: Event) => {
 }
 
 .search-status {
-  font-size: 12px;
+  font-size:  var(--font-size-sm);
   color: var(--text-secondary);
 }
 

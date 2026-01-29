@@ -129,12 +129,12 @@ async function sendMessage() {
 
 <style scoped>
 .contact-form-container {
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(20px);
+  background: color-mix(in srgb, var(--bg-surface) 88%, transparent);
+  backdrop-filter: blur(24px);
   border-radius: 20px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 32px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--border-default);
+  padding: 28px 24px 24px;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
 }
 
 .contact-header {
@@ -143,16 +143,16 @@ async function sendMessage() {
 }
 
 .contact-header h2 {
-  font-size: 1.5rem;
+  font-size: var(--font-size-xl);
   font-weight: 700;
-  color: #1d1d1f;
+  color: var(--text-primary);
   margin-bottom: 8px;
   letter-spacing: -0.5px;
 }
 
 .contact-header p {
-  color: #86868b;
-  font-size: 1rem;
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
   margin: 0;
   line-height: 1.4;
 }
@@ -168,17 +168,17 @@ async function sendMessage() {
   display: flex;
   align-items: center;
   gap: 16px;
-  padding: 16px;
-  background: rgba(255, 255, 255, 0.6);
+  padding: 14px 16px;
+  background: color-mix(in srgb, var(--bg-page) 70%, transparent);
   border-radius: 12px;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  border: 1px solid color-mix(in srgb, var(--border-default) 80%, transparent);
   transition: all 0.2s ease;
 }
 
 .contact-method:hover {
-  background: rgba(255, 255, 255, 0.9);
+  background: color-mix(in srgb, var(--bg-surface) 85%, transparent);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.35);
 }
 
 .method-icon {
@@ -188,10 +188,10 @@ async function sendMessage() {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #007aff, #5856d6);
+  background: linear-gradient(135deg, var(--color-cta), var(--color-cta-hover));
   border-radius: 10px;
-  color: white;
-  font-size: 1.2rem;
+  color: var(--bg-page);
+  font-size: var(--font-size-md);
 }
 
 .method-content {
@@ -202,28 +202,28 @@ async function sendMessage() {
 }
 
 .method-label {
-  font-size: 0.9rem;
+  font-size: var(--font-size-xs);
   font-weight: 600;
-  color: #86868b;
+  color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
 .method-link {
-  color: #007aff;
+  color: var(--color-cta);
   text-decoration: none;
   font-weight: 500;
-  font-size: 1rem;
+  font-size: var(--font-size-sm);
   transition: color 0.2s ease;
 }
 
 .method-link:hover {
-  color: #0056b3;
+  color: var(--color-cta-hover);
 }
 
 .method-desc {
-  color: #1d1d1f;
-  font-size: 0.95rem;
+  color: var(--text-primary);
+  font-size: var(--font-size-sm);
   line-height: 1.4;
 }
 
@@ -240,19 +240,19 @@ async function sendMessage() {
 }
 
 .email-label {
-  font-size: 0.9rem;
+  font-size: var(--font-size-xs);
   font-weight: 600;
-  color: #1d1d1f;
+  color: var(--text-primary);
   letter-spacing: 0.3px;
 }
 
 .email-input {
   border-radius: 12px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border-default);
   padding: 16px;
-  font-size: 1rem;
-  background: rgba(255, 255, 255, 0.8);
-  color: #1d1d1f;
+  font-size: var(--font-size-sm);
+  background: color-mix(in srgb, var(--bg-page) 75%, transparent);
+  color: var(--text-primary);
   font-family: inherit;
   transition: all 0.2s ease;
   backdrop-filter: blur(10px);
@@ -260,35 +260,35 @@ async function sendMessage() {
 
 .email-input:focus {
   outline: none;
-  border-color: #007aff;
-  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
-  background: rgba(255, 255, 255, 0.95);
+  border-color: var(--color-cta);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-cta) 35%, transparent);
+  background: color-mix(in srgb, var(--bg-surface) 85%, transparent);
 }
 
 .email-input::placeholder {
-  color: #86868b;
+  color: var(--text-secondary);
 }
 
 .email-input-error {
-  border-color: #ff3b30;
-  box-shadow: 0 0 0 3px rgba(255, 59, 48, 0.1);
-  background: rgba(255, 255, 255, 0.95);
+  border-color: var(--color-alert);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-alert) 35%, transparent);
+  background: color-mix(in srgb, var(--bg-surface) 85%, transparent);
 }
 
 .email-error {
-  color: #ff3b30;
-  font-size: 0.8rem;
+  color: var(--color-alert);
+  font-size: var(--font-size-xs);
   margin-top: 4px;
 }
 
 .contact-textarea {
   min-height: 100px;
   border-radius: 12px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border-default);
   padding: 16px;
-  font-size: 1rem;
-  background: rgba(255, 255, 255, 0.8);
-  color: #1d1d1f;
+  font-size: var(--font-size-sm);
+  background: color-mix(in srgb, var(--bg-page) 75%, transparent);
+  color: var(--text-primary);
   resize: vertical;
   font-family: inherit;
   transition: all 0.2s ease;
@@ -297,13 +297,13 @@ async function sendMessage() {
 
 .contact-textarea:focus {
   outline: none;
-  border-color: #007aff;
-  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
-  background: rgba(255, 255, 255, 0.95);
+  border-color: var(--color-cta);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-cta) 35%, transparent);
+  background: color-mix(in srgb, var(--bg-surface) 85%, transparent);
 }
 
 .contact-textarea::placeholder {
-  color: #86868b;
+  color: var(--text-secondary);
 }
 
 .contact-send-btn {
@@ -311,12 +311,12 @@ async function sendMessage() {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: linear-gradient(135deg, #007aff, #5856d6);
-  color: white;
+  background: linear-gradient(135deg, var(--color-cta), var(--color-cta-hover));
+  color: var(--bg-page);
   border: none;
   border-radius: 12px;
   padding: 16px 24px;
-  font-size: 1rem;
+  font-size: var(--font-size-sm);
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -325,7 +325,7 @@ async function sendMessage() {
 
 .contact-send-btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(0, 122, 255, 0.3);
+  box-shadow: 0 10px 30px color-mix(in srgb, var(--color-cta) 45%, transparent);
 }
 
 .contact-send-btn:active {
@@ -345,7 +345,7 @@ async function sendMessage() {
 }
 
 .send-icon {
-  font-size: 1.1rem;
+  font-size: var(--font-size-md);
 }
 
 .message-alert {
@@ -355,29 +355,50 @@ async function sendMessage() {
   padding: 16px;
   border-radius: 12px;
   margin-top: 16px;
-  font-size: 0.95rem;
+  font-size: var(--font-size-sm);
   font-weight: 500;
   animation: slideIn 0.3s ease;
 }
 
 .message-alert.success {
-  background: rgba(52, 199, 89, 0.1);
-  border: 1px solid rgba(52, 199, 89, 0.2);
-  color: #34c759;
+  background: color-mix(in srgb, var(--color-eligible) 10%, var(--bg-surface));
+  border: 1px solid color-mix(in srgb, var(--color-eligible) 20%, transparent);
+  color: var(--color-eligible);
 }
 
 .message-alert.error {
-  background: rgba(255, 59, 48, 0.1);
-  border: 1px solid rgba(255, 59, 48, 0.2);
-  color: #ff3b30;
+  background: color-mix(in srgb, var(--color-alert) 10%, var(--bg-surface));
+  border: 1px solid color-mix(in srgb, var(--color-alert) 20%, transparent);
+  color: var(--color-alert);
 }
 
 .message-icon {
-  font-size: 1.1rem;
+  font-size: var(--font-size-md);
 }
 
 .message-text {
   flex: 1;
+}
+
+/* Mobile tweaks: make card narrower and fonts slightly larger on small screens */
+@media (max-width: 768px) {
+  .contact-form-container {
+    padding: 20px 16px 18px;
+    border-radius: 16px;
+  }
+
+  .contact-header h2 {
+    font-size: var(--font-size-2xl);
+  }
+
+  .contact-header p,
+  .method-desc,
+  .email-input,
+  .contact-textarea,
+  .contact-send-btn,
+  .message-alert {
+    font-size: var(--font-size-md);
+  }
 }
 
 @keyframes slideIn {
