@@ -7,14 +7,14 @@
       </div>
     </div>
     <form class="search-form" @submit.prevent="onSubmit">
-      <input
+      <el-input
         class="search-input"
-        type="text"
         name="flightNo"
         autocomplete="off"
         placeholder="Flight number, e.g. FR1234"
-        :value="flightNo"
-        @input="onFlightNoInput"
+        :model-value="flightNo"
+        @update:model-value="emit('update:flightNo', $event)"
+        clearable
       />
       <div class="date-picker-wrapper">
         <el-date-picker
@@ -74,11 +74,6 @@ watch(
 const onSubmit = () => {
   emit('search')
 }
-
-const onFlightNoInput = (event: Event) => {
-  const target = event.target as HTMLInputElement | null
-  emit('update:flightNo', target?.value ?? '')
-}
 </script>
 
 <style scoped>
@@ -127,18 +122,35 @@ const onFlightNoInput = (event: Event) => {
 .search-input {
   width: 100%;
   height: 42px;
-  box-sizing: border-box;
-  padding: 10px 14px;
+  display: block;
+}
+
+:deep(.search-input .el-input__wrapper) {
+  width: 100%;
+  padding: 0 14px;
+  height: 42px;
   border-radius: 999px;
   border: 1px solid color-mix(in srgb, var(--border-default) 55%, transparent);
   background: var(--bg-surface);
-  color: var(--text-primary);
-  font-size: var(--font-size-sm);
-  outline: none;
+  box-shadow: none;
 }
 
-.search-input::placeholder {
+:deep(.search-input .el-input__inner) {
+  color: var(--text-primary);
+  font-size: var(--font-size-sm);
+  height: 40px;
+  line-height: 40px;
+  padding: 0;
+}
+
+:deep(.search-input .el-input__inner::placeholder) {
   color: var(--text-secondary);
+}
+
+:deep(.search-input .el-input__wrapper.is-focus),
+:deep(.search-input .el-input__wrapper:hover) {
+  border-color: var(--color-cta);
+  box-shadow: 0 0 0 1px var(--color-cta), 0 0 0 4px color-mix(in srgb, var(--color-cta) 35%, transparent);
 }
 
 .date-picker-wrapper {
