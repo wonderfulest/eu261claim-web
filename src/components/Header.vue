@@ -2,7 +2,7 @@
   <header class="header-bar">
     <div class="header-inner">
       <router-link to="/" class="brand">
-        <img class="brand-logo" :src="logo" alt="EU261 Claim" />
+        <img class="brand-logo" src="/logo-horizontal.svg" alt="EU261 Claim" />
       </router-link>
 
       <button class="mobile-menu-btn" type="button" @click="toggleMobileMenu">
@@ -39,7 +39,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import logo from '@/assets/favicon/favicon-long.png'
 
 const router = useRouter()
 const route = useRoute()

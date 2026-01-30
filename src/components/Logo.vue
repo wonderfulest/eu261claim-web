@@ -1,9 +1,8 @@
 <template>
-  <img :src="logo" alt="EU261 Claim" class="logo" />
+  <img src="/favicon-96x96.png" alt="EU261 Claim" class="logo" />
 </template>
 
 <script setup lang="ts">
-import logo from '@/assets/favicon/favicon.png'
 // 通用 Logo 组件，无需特殊逻辑
 </script>
 

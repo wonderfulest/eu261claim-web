@@ -8,11 +8,17 @@
   >
     <!-- 桌面端布局 -->
     <div v-if="!isExpanded && !isMobile" class="footer-main desktop-layout">
-      © 2025 CHEERY LTD |
-      <a href="/terms-and-conditions">Terms of Use</a> |
-      <a href="/privacy-policy">Privacy Policy</a> |
-      <a href="/contact">Contact</a>
-      <!-- <a href="/faq">FAQ</a> -->
+      <div class="footer-brand">
+        <img class="footer-logo" src="/logo-horizontal.svg" alt="EU261 Claim" />
+        <span class="footer-brand-text">EU261 Claim</span>
+      </div>
+      <div class="footer-links">
+        © 2025 CHEERY LTD |
+        <a href="/terms-and-conditions">Terms of Use</a> |
+        <a href="/privacy-policy">Privacy Policy</a> |
+        <a href="/contact">Contact</a>
+        <!-- <a href="/faq">FAQ</a> -->
+      </div>
     </div>
     
     <!-- 移动端布局 -->
@@ -101,12 +107,12 @@ const scrollToTop = () => {
   }, 500)
 }
 
-// 
+// 检测是否为移动端
 function checkMobile() {
   isMobile.value = window.innerWidth <= 768
 }
 
-// 
+// 处理滚动事件（移动端悬浮 footer 显隐）
 function handleScroll() {
   if (!ticking && isMobile.value) {
     requestAnimationFrame(updateFooterVisibility)
@@ -114,7 +120,7 @@ function handleScroll() {
   }
 }
 
-// 
+// 根据页面高度和滚动位置更新 footer 可见性
 function updateFooterVisibility() {
   const windowHeight = window.innerHeight
   const documentHeight = document.documentElement.scrollHeight
@@ -149,11 +155,11 @@ function updateFooterVisibility() {
   ticking = false
 }
 
-// 
+// 处理窗口尺寸变化
 function handleResize() {
   checkMobile()
   if (!isMobile.value) {
-    isVisible.value = true // 
+    isVisible.value = true
   }
 }
 
@@ -172,7 +178,6 @@ onMounted(() => {
     isVisible.value = false
     window.addEventListener('scroll', handleScroll, { passive: true })
     window.addEventListener('resize', handleResize)
-    // 
     updateFooterVisibility()
   }
 })
@@ -204,6 +209,29 @@ onUnmounted(() => {
   align-items: center;
   justify-content: center;
   overflow: hidden;
+}
+
+.footer-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: 10px;
+}
+
+.footer-logo {
+  height: 20px;
+  width: auto;
+  display: block;
+  opacity: 0.9;
+}
+
+.footer-brand-text {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+}
+
+.footer-links {
+  display: inline-block;
 }
 
 /* */
