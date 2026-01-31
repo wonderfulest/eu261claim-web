@@ -116,10 +116,10 @@ const mockClaim = computed<SimpleClaimDetail>(() => {
   // TODO: Replace with real API call based on id
   return {
     id,
-    claimNumber: `EU261-2025-000${id}`,
+    claimNumber: `EU261-2026-000${id}`,
     status: id === '2' ? 'approved' : 'reviewing',
     flightNumber: 'LH1234',
-    flightDate: '2025-01-10',
+    flightDate: '2026-01-10',
     departureAirport: 'FRA',
     arrivalAirport: 'LHR',
     passengerName: 'John Doe',
@@ -129,7 +129,7 @@ const mockClaim = computed<SimpleClaimDetail>(() => {
     incidentType: 'delay',
     delayHours: 4,
     description: 'The flight departed with a 4-hour delay due to operational issues. No meal vouchers or hotel were provided.',
-    updatedAt: '2025-01-12 10:30'
+    updatedAt: '2026-01-12 10:30'
   }
 })
 
@@ -140,13 +140,13 @@ const timeline = computed<TimelineItem[]>(() => {
     {
       id: '1',
       status: 'submitted',
-      time: '2025-01-11 09:15',
+      time: '2026-01-11 09:15',
       message: 'Your claim has been submitted.'
     },
     {
       id: '2',
       status: 'reviewing',
-      time: '2025-01-11 14:30',
+      time: '2026-01-11 14:30',
       message: 'Our legal team is reviewing your case.'
     },
     {

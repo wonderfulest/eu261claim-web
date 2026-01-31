@@ -103,25 +103,25 @@ onMounted(() => {
     claims.value = [
       {
         id: '1',
-        claimNumber: 'EU261-2025-0001',
+        claimNumber: 'EU261-2026-0001',
         status: 'reviewing',
         flightNumber: 'LH1234',
-        flightDate: '2025-01-10',
+        flightDate: '2026-01-10',
         departureAirport: 'FRA',
         arrivalAirport: 'LHR',
         passengerName: 'John Doe',
-        updatedAt: '2025-01-12'
+        updatedAt: '2026-01-12'
       },
       {
         id: '2',
-        claimNumber: 'EU261-2025-0002',
+        claimNumber: 'EU261-2026-0002',
         status: 'approved',
         flightNumber: 'AF5678',
-        flightDate: '2025-01-05',
+        flightDate: '2026-01-05',
         departureAirport: 'CDG',
         arrivalAirport: 'JFK',
         passengerName: 'Jane Smith',
-        updatedAt: '2025-01-11'
+        updatedAt: '2026-01-11'
       }
     ]
     loading.value = false

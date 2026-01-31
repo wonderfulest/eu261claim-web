@@ -5,21 +5,27 @@
       <p class="page-subtitle">These flights qualify for EU261 compensation.</p>
     </header>
 
-    <FlightSearchCard
-      v-model:flightNo="searchFlightNo"
-      v-model:flightDate="searchDate"
-      :loading="isLoading"
-      :errorMessage="errorMessage"
-      :hasNoResult="!!(apiFlights && apiFlights.length === 0)"
-      @search="searchFlights"
-    />
+    <section class="page-content" aria-label="Search and results">
+      <aside class="page-aside" aria-label="Search form">
+        <FlightSearchCard
+          v-model:flightNo="searchFlightNo"
+          v-model:flightDate="searchDate"
+          :loading="isLoading"
+          :errorMessage="errorMessage"
+          :hasNoResult="!!(apiFlights && apiFlights.length === 0)"
+          @search="searchFlights"
+        />
+      </aside>
 
-    <FlightResultsTable
-      :flights="flights"
-      @claim="handleClaim"
-      @searchAnother="handleSearchAnother"
-      @manualCheck="handleManualCheck"
-    />
+      <main class="page-main" aria-label="Eligible flights">
+        <FlightResultsTable
+          :flights="flights"
+          @claim="handleClaim"
+          @searchAnother="handleSearchAnother"
+          @manualCheck="handleManualCheck"
+        />
+      </main>
+    </section>
 
     <footer class="page-footer">
       <p class="disclaimer">
@@ -265,11 +271,36 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .eu261-page {
-  background: radial-gradient(1100px 500px at 50% -120px, rgba(59, 130, 246, 0.25) 0%, rgba(14, 14, 17, 0) 60%),
-    radial-gradient(900px 420px at 50% 10%, rgba(229, 72, 77, 0.12) 0%, rgba(14, 14, 17, 0) 65%),
+  background:
+    radial-gradient(
+      1100px 500px at 50% -120px,
+      color-mix(in srgb, var(--color-cta) 25%, transparent) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      900px 420px at 50% 10%,
+      color-mix(in srgb, var(--color-alert) 12%, transparent) 0%,
+      transparent 65%
+    ),
     var(--bg-page);
   padding: 36px 16px 48px;
   color: var(--text-primary);
+}
+
+.page-content {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.page-aside {
+  min-width: 0;
+}
+
+.page-main {
+  min-width: 0;
 }
 
 .page-header {

@@ -56,8 +56,12 @@ function handleContactSend(message: string, email?: string) {
 <style scoped>
 .contact-page {
   min-height: 100vh;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background:
+    radial-gradient(900px 420px at 20% -10%, color-mix(in srgb, var(--color-cta) 18%, transparent) 0%, transparent 60%),
+    radial-gradient(700px 360px at 80% 10%, color-mix(in srgb, var(--color-alert) 10%, transparent) 0%, transparent 65%),
+    var(--bg-page);
   padding: 20px 0;
+  color: var(--text-primary);
 }
 
 .contact-container {
@@ -73,14 +77,14 @@ function handleContactSend(message: string, email?: string) {
 .contact-title {
   font-size: 3rem;
   font-weight: 800;
-  color: #1d1d1f;
+  color: var(--text-primary);
   margin-bottom: 16px;
   letter-spacing: -1px;
 }
 
 .contact-subtitle {
   font-size: 1.2rem;
-  color: #86868b;
+  color: var(--text-secondary);
   max-width: 600px;
   margin: 0 auto;
   line-height: 1.6;
@@ -100,12 +104,12 @@ function handleContactSend(message: string, email?: string) {
 }
 
 .info-card {
-  background: rgba(255, 255, 255, 0.8);
+  background: color-mix(in srgb, var(--bg-surface) 88%, transparent);
   backdrop-filter: blur(20px);
   border-radius: 20px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid color-mix(in srgb, var(--border-default) 70%, transparent);
   padding: 20px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 32px color-mix(in srgb, var(--bg-page) 55%, transparent);
   transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
@@ -113,7 +117,7 @@ function handleContactSend(message: string, email?: string) {
 
 .info-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 16px 48px color-mix(in srgb, var(--bg-page) 65%, transparent);
 }
 
 .info-header {
@@ -137,20 +141,20 @@ function handleContactSend(message: string, email?: string) {
 .info-content h3 {
   font-size: 1.1rem;
   font-weight: 700;
-  color: #1d1d1f;
+  color: var(--text-primary);
   margin: 0;
   letter-spacing: -0.5px;
 }
 
 .info-content p {
-  color: #86868b;
+  color: var(--text-secondary);
   font-size: 0.9rem;
   line-height: 1.4;
   margin-bottom: 8px;
 }
 
 .info-link {
-  color: #007aff;
+  color: var(--color-cta);
   text-decoration: none;
   font-weight: 600;
   font-size: 0.9rem;
@@ -158,7 +162,7 @@ function handleContactSend(message: string, email?: string) {
 }
 
 .info-link:hover {
-  color: #0056b3;
+  color: var(--color-cta-hover);
 }
 
 .contact-form-section {

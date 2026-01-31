@@ -5,7 +5,7 @@
       <div class="privacy-meta">
         <h1 class="privacy-title">Privacy Policy</h1>
         <!-- <span class="privacy-breadcrumb">Home / Privacy Policy</span> -->
-        <span class="privacy-updated">Last Updated: 2025-06-05</span>
+        <span class="privacy-updated">Last Updated: 2026-06-05</span>
       </div>
      
     </div>
@@ -24,7 +24,7 @@
     </nav>
     <div class="privacy-content">
       <h2 id="collection">1. Collection of Personal Information</h2>
-      <p>EU261 Claim (operated by WuKong OÜ) collects your email address solely for the purpose of providing service updates and essential communication related to your flight compensation claim. You may choose not to provide your email, but this may prevent us from providing support.</p>
+      <p>EU261Claim collects your email address solely for the purpose of providing service updates and essential communication related to your flight compensation claim. You may choose not to provide your email, but this may prevent us from providing support.</p>
 
       <h2 id="use">2. Use of Information</h2>
       <ul>
@@ -57,8 +57,8 @@
 
       <h2 id="contact">9. Contact</h2>
       <p>If you have any questions, requests, or concerns regarding this Privacy Policy or your personal data, please contact us:</p>
-      <p><strong>Business Name:</strong> WuKong OÜ</p>
-      <p><strong>Address:</strong> Harju maakond, Tallinn, Kesklinna linnaosa, Ahtri tn 12, 15551, Estonia</p>
+      <p><strong>Business Name:</strong> EU261Claim</p>
+      <p><strong>Address:</strong> 71-75, Shelton Street, Covent Garden, London, WC2H 9JQ, UNITED KINGDOM</p>
       <p><strong>E-mail:</strong> <a href="mailto:support@eu261claim.com">support@eu261claim.com</a></p>
     </div>
   </div>
@@ -73,7 +73,7 @@ import Logo from '@/components/Logo.vue'
   max-width: 800px;
   margin: 0 auto;
   padding: 40px 0 0 0;
-  background: #fff;
+  background: var(--bg-page);
   min-height: 100vh;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
@@ -86,29 +86,29 @@ import Logo from '@/components/Logo.vue'
   margin-bottom: 1.2rem;
   text-align: left;
   letter-spacing: 0.01em;
-  color: #1a2a3a;
+  color: var(--text-primary);
 }
 .privacy-meta {
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 0.98rem;
-  color: #888;
+  color: var(--text-secondary);
   margin-bottom: 8px;
   padding: 0 20px;
 }
 .privacy-breadcrumb {
-  color: #888;
+  color: var(--text-secondary);
 }
 .privacy-updated {
-  color: #888;
+  color: var(--text-secondary);
 }
 .privacy-toc {
   margin-bottom: 32px;
-  background: #f5f7fa;
+  background: var(--bg-row-hover);
   border-radius: 8px;
   padding: 18px 24px;
-  box-shadow: 0 1px 4px #0001;
+  box-shadow: 0 1px 4px color-mix(in srgb, var(--bg-page) 70%, transparent);
 }
 .privacy-toc ul {
   list-style: none;
@@ -122,32 +122,32 @@ import Logo from '@/components/Logo.vue'
   font-size: 1.05rem;
 }
 .privacy-toc a {
-  color: #0056b3;
+  color: var(--color-cta);
   text-decoration: underline;
   font-weight: 600;
   transition: color 0.2s;
 }
 .privacy-toc a:hover {
-  color: #003366;
+  color: var(--color-cta-hover);
 }
 .privacy-content {
-  background: #fff;
+  background: var(--bg-surface);
   border-radius: 12px;
   padding: 16px 36px 40px 36px;
   margin-bottom: 2.5rem;
-  box-shadow: 0 2px 8px #0001;
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--bg-page) 70%, transparent);
   text-align: left;
-  color: #222;
+  color: var(--text-primary);
 }
 .privacy-content h2 {
   font-size: 1.18rem;
-  color: #1a2a3a;
+  color: var(--text-primary);
   margin-top: 2em;
   margin-bottom: 10px;
   font-weight: 700;
 }
 .privacy-content p, .privacy-content ul {
-  color: #222;
+  color: var(--text-primary);
   font-size: 1.08rem;
   line-height: 1.7;
   margin-bottom: 1.1em;
@@ -157,7 +157,7 @@ import Logo from '@/components/Logo.vue'
   padding-left: 1.5em;
 }
 a {
-  color: #0056b3;
+  color: var(--color-cta);
   text-decoration: underline;
 }
 </style> 

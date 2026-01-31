@@ -9,11 +9,10 @@
     <!-- 桌面端布局 -->
     <div v-if="!isExpanded && !isMobile" class="footer-main desktop-layout">
       <div class="footer-brand">
-        <img class="footer-logo" src="/logo-horizontal.svg" alt="EU261 Claim" />
-        <span class="footer-brand-text">EU261 Claim</span>
+        <img class="footer-logo" src="/logo-horizontal.svg" alt="EU261Claim" />
+        <!-- <span class="footer-brand-text">EU261Claim 2026</span> -->
       </div>
       <div class="footer-links">
-        © 2025 CHEERY LTD |
         <a href="/terms-and-conditions">Terms of Use</a> |
         <a href="/privacy-policy">Privacy Policy</a> |
         <a href="/contact">Contact</a>
@@ -41,7 +40,7 @@
           </a>
           
           <a href="mailto:support@eu261claim.com" class="footer-action">
-            <div class="action-icon">✉️</div>
+            <!-- <div class="action-icon">✉️</div> -->
             <span>Support</span>
           </a>
           
@@ -51,26 +50,26 @@
           </button>
         </div>
         
-        <div class="footer-copyright">
-          © 2025 CHEERY LTD
-        </div>
+        <!-- <div class="footer-copyright">
+          © 2026 EU261Claim
+        </div> -->
       </div>
     </div>
     <transition name="footer-expand">
       <div v-if="isExpanded" class="footer-detail">
-        <div class="footer-detail-title">© 2025 CHEERY LTD. All Rights Reserved</div>
+        <div class="footer-detail-title">© 2026 EU261Claim. All Rights Reserved</div>
         <div class="footer-detail-block">
           <strong>Address:</strong><br>
-          Harju maakond, Tallinn, Kesklinna linnaosa, Ahtri tn 12, 15551, Estonia
+          71-75, Shelton Street, Covent Garden, London, WC2H 9JQ, UNITED KINGDOM
         </div>
         <div class="footer-detail-block">
           <strong>Email:</strong>
           <a href="mailto:support@eu261claim.com">support@eu261claim.com</a>
         </div>
-        <div class="footer-detail-block">
+        <!-- <div class="footer-detail-block">
           <strong>Privacy Policy:</strong>
           <a href="/privacy-policy" target="_blank">View Details</a>
-        </div>
+        </div> -->
         <!-- <div class="footer-detail-block">
           <strong>Contact us on SLACK:</strong>
           <a href="https://join.slack.com/t/eu261claim/shared_invite/zt-37oujfc82-w6vpl_hzGNYYmsmN5vNOzg" target="_blank">Join Slack Channel</a>
@@ -214,24 +213,33 @@ onUnmounted(() => {
 .footer-brand {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   margin-right: 10px;
 }
 
 .footer-logo {
-  height: 20px;
+  height: 30px;
   width: auto;
   display: block;
   opacity: 0.9;
 }
 
 .footer-brand-text {
-  font-size: var(--font-size-xs);
-  color: var(--text-secondary);
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--text-primary);
 }
 
 .footer-links {
   display: inline-block;
+}
+
+.footer-main.desktop-layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
 }
 
 /* */

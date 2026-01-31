@@ -80,14 +80,14 @@ const onSubmit = () => {
 .search-card {
   max-width: 1120px;
   margin: 8px auto 20px;
-  padding: 20px 22px;
+  padding: 26px 24px 24px;
   border-radius: 16px;
   background: radial-gradient(800px 260px at 0% 0%, color-mix(in srgb, var(--color-cta) 35%, transparent) 0%, transparent 55%),
     var(--bg-table);
   border: 1px solid color-mix(in srgb, var(--border-default) 65%, transparent);
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 18px;
   box-shadow:
     0 0 0 1px color-mix(in srgb, var(--color-cta) 70%, transparent),
     0 0 0 4px color-mix(in srgb, var(--color-cta) 30%, transparent);
@@ -101,7 +101,7 @@ const onSubmit = () => {
 }
 
 .search-title {
-  font-size: var(--font-size-md);
+  font-size: var(--font-size-lg);
   font-weight: 650;
 }
 
@@ -115,7 +115,7 @@ const onSubmit = () => {
 .search-form {
   display: grid;
   grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.6fr) auto;
-  gap: 12px;
+  gap: 14px;
   align-items: stretch;
 }
 
@@ -291,5 +291,26 @@ const onSubmit = () => {
 
 .search-status.error {
   color: var(--color-alert);
+}
+
+@media (max-width: 640px) {
+  .search-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .search-hint {
+    max-width: none;
+    text-align: left;
+  }
+
+  .search-form {
+    grid-template-columns: 1fr;
+  }
+
+  .search-button {
+    width: 100%;
+    justify-content: center;
+  }
 }
 </style>
