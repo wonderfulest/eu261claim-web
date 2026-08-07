@@ -22,7 +22,7 @@
       </nav>
     </div>
 
-    <div class="mobile-nav" :class="{ open: isMobileOpen }">
+    <div v-if="isMobileOpen" class="mobile-nav">
       <nav class="mobile-nav-inner">
         <router-link to="/" class="mobile-link" @click="closeMobile">Home</router-link>
         <router-link to="/how-it-works" class="mobile-link" @click="closeMobile">How It Works</router-link>
@@ -374,14 +374,8 @@ const handleMobileStart = () => {
   background: rgba(14, 14, 17, 0.92);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  transform: translateX(-100%);
-  transition: transform 0.3s ease;
   z-index: 30;
   overflow-y: auto;
-}
-
-.mobile-nav.open {
-  transform: translateX(0);
 }
 
 .mobile-theme-toggle {
